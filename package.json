@@ -39,6 +39,6 @@
     "bluebird": "^2.9.34",
     "lodash": "^3.10.1",
     "node-localstorage": "^0.5.2",
-    "resin-settings-client": "^2.0.0"
+    "resin-settings-client": "^3.0.0"
   }
 }
