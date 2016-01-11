@@ -6,6 +6,8 @@ resin-settings-storage
 [![Build Status](https://travis-ci.org/resin-io/resin-settings-storage.svg?branch=master)](https://travis-ci.org/resin-io/resin-settings-storage)
 [![Build status](https://ci.appveyor.com/api/projects/status/w9kqe2ok1rbkj42y?svg=true)](https://ci.appveyor.com/project/resin-io/resin-settings-storage)
 
+Join our online chat at [![Gitter chat](https://badges.gitter.im/resin-io/chat.png)](https://gitter.im/resin-io/chat)
+
 Resin.io settings storage utilities.
 
 Role
