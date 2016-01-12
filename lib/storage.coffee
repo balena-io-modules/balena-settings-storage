@@ -56,6 +56,14 @@ exports.set = (name, value) ->
 ###
 exports.get = (name) ->
 	Promise.try ->
+
+		# Run `node-localstorage` constructor to update
+		# internal cache of saved files.
+		# Without this, external changes to the data
+		# directory (with `fs` for example) will not
+		# be detected by `node-localstorage`.
+		localStorage._init()
+
 		result = localStorage.getItem(name) or undefined
 
 		if /^-?\d+\.?\d*$/.test(result)

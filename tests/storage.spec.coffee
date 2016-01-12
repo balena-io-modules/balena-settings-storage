@@ -1,4 +1,7 @@
 m = require('mochainon')
+path = require('path')
+fs = require('fs')
+settings = require('resin-settings-client')
 localStorage = require('../lib/local-storage')
 storage = require('../lib/storage')
 
@@ -98,6 +101,18 @@ describe 'Storage:', ->
 
 			it 'should eventually be undefined', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.be.undefined
+
+		describe 'given an externally saved value', ->
+
+			beforeEach ->
+				@path = path.join(settings.get('dataDirectory'), 'foo')
+				fs.writeFileSync(@path, 'hello world')
+
+			afterEach ->
+				fs.unlinkSync(@path)
+
+			it 'should be able to read back', ->
+				m.chai.expect(storage.get('foo')).to.eventually.equal('hello world')
 
 	describe '.has()', ->
 
