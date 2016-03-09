@@ -77,9 +77,7 @@ exports.get = function(name) {
       result = JSON.parse(result);
     } catch (_error) {}
     return result;
-  })["catch"](function() {
-    return void 0;
-  });
+  }).catchReturn(void 0);
 };
 
 

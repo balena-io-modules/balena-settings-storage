@@ -36,7 +36,7 @@
     "mochainon": "^1.0.0"
   },
   "dependencies": {
-    "bluebird": "^2.9.34",
+    "bluebird": "^3.3.4",
     "lodash": "^3.10.1",
     "node-localstorage": "^1.1.2",
     "resin-settings-client": "^3.0.0"
