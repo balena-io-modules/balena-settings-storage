@@ -76,8 +76,7 @@ exports.get = (name) ->
 
 	# getItem() throws a ENOENT error in
 	# NodeJS if the file doesn't exist.
-	.catch ->
-		return undefined
+	.catchReturn(undefined)
 
 ###*
 # @summary Check if a value exists
