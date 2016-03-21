@@ -20,6 +20,8 @@ settings = require('resin-settings-client')
 # storage if not in the browser.
 unless localStorage?
 	LocalStorage = require('node-localstorage').LocalStorage
-	localStorage = new LocalStorage(settings.get('dataDirectory'))
+
+	# Set an infinite quota
+	localStorage = new LocalStorage(settings.get('dataDirectory'), Infinity)
 
 module.exports = localStorage
