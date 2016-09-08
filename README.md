@@ -33,12 +33,13 @@ Documentation
 
 
 * [storage](#module_storage)
-  * [.set(name, value)](#module_storage.set) ⇒ <code>Promise</code>
-  * [.get(name)](#module_storage.get) ⇒ <code>Promise.&lt;\*&gt;</code>
-  * [.has(name)](#module_storage.has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-  * [.remove(name)](#module_storage.remove) ⇒ <code>Promise</code>
+    * [.set(name, value)](#module_storage.set) ⇒ <code>Promise</code>
+    * [.get(name)](#module_storage.get) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.has(name)](#module_storage.has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.remove(name)](#module_storage.remove) ⇒ <code>Promise</code>
 
 <a name="module_storage.set"></a>
+
 ### storage.set(name, value) ⇒ <code>Promise</code>
 **Kind**: static method of <code>[storage](#module_storage)</code>  
 **Summary**: Set a value  
@@ -54,6 +55,7 @@ Documentation
 storage.set('token', '1234')
 ```
 <a name="module_storage.get"></a>
+
 ### storage.get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
 **Kind**: static method of <code>[storage](#module_storage)</code>  
 **Summary**: Get a value  
@@ -70,6 +72,7 @@ storage.get('token').then (token) ->
 	console.log(token)
 ```
 <a name="module_storage.has"></a>
+
 ### storage.has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 **Kind**: static method of <code>[storage](#module_storage)</code>  
 **Summary**: Check if a value exists  
@@ -89,6 +92,7 @@ storage.has('token').then (hasToken) ->
 		console.log('No')
 ```
 <a name="module_storage.remove"></a>
+
 ### storage.remove(name) ⇒ <code>Promise</code>
 **Kind**: static method of <code>[storage](#module_storage)</code>  
 **Summary**: Remove a value  
@@ -114,7 +118,7 @@ Tests
 Run the test suite by doing:
 
 ```sh
-$ gulp test
+$ npm test
 ```
 
 Contribute
