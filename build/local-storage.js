@@ -16,7 +16,7 @@ limitations under the License.
  */
 var LocalStorage, settings;
 
-if (typeof localStorage !== 'undefined') {
+if (typeof localStorage !== "undefined" && localStorage !== null) {
   module.exports = localStorage;
 } else {
   settings = require('resin-settings-client');
