@@ -68,7 +68,9 @@ exports.set = function(name, value) {
 exports.get = function(name) {
   return Promise["try"](function() {
     var result;
-    localStorage._init();
+    if (typeof localStorage._init === "function") {
+      localStorage._init();
+    }
     result = localStorage.getItem(name) || void 0;
     if (/^-?\d+\.?\d*$/.test(result)) {
       result = parseFloat(result);

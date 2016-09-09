@@ -62,7 +62,7 @@ exports.get = (name) ->
 		# Without this, external changes to the data
 		# directory (with `fs` for example) will not
 		# be detected by `node-localstorage`.
-		localStorage._init()
+		localStorage._init?()
 
 		result = localStorage.getItem(name) or undefined
 

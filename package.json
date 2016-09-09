@@ -18,8 +18,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "gulp test",
-    "prepublish": "gulp build",
+    "test": "npm run test-node && npm run test-browser",
+    "test-node": "gulp test",
+    "test-browser": "karma start",
+    "prepublish": "npm test && gulp build",
     "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
   },
   "author": "Juan Cruz Viotti <juan@resin.io>",
@@ -32,13 +34,15 @@
     "gulp-mocha": "~2.0.0",
     "gulp-util": "~3.0.1",
     "jsdoc-to-markdown": "^1.1.1",
+    "karma": "^1.2.0",
     "mocha": "~2.0.1",
-    "mochainon": "^1.0.0"
+    "mochainon": "^1.0.0",
+    "resin-config-karma": "^1.0.4"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
     "lodash": "^3.10.1",
     "node-localstorage": "^1.1.2",
-    "resin-settings-client": "^3.0.0"
+    "resin-settings-client": "^3.5.1"
   }
 }

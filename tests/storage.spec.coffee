@@ -1,9 +1,13 @@
 m = require('mochainon')
 path = require('path')
-fs = require('fs')
-settings = require('resin-settings-client')
 localStorage = require('../lib/local-storage')
 storage = require('../lib/storage')
+
+IS_BROWSER = typeof window isnt 'undefined'
+
+if not IS_BROWSER
+	fs = require('fs')
+	settings = require('resin-settings-client')
 
 describe 'Storage:', ->
 
@@ -103,6 +107,9 @@ describe 'Storage:', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.be.undefined
 
 		describe 'given an externally saved value', ->
+
+			# this test is node-specific
+			return if IS_BROWSER
 
 			beforeEach ->
 				@path = path.join(settings.get('dataDirectory'), 'foo')
