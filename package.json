@@ -3,10 +3,10 @@
   "version": "1.0.4",
   "description": "Resin.io settings storage utilities",
   "main": "build/storage.js",
-  "homepage": "https://github.com/resin-io/resin-settings-storage",
+  "homepage": "https://github.com/resin-io-modules/resin-settings-storage",
   "repository": {
     "type": "git",
-    "url": "git://github.com/resin-io/resin-settings-storage.git"
+    "url": "git://github.com/resin-io-modules/resin-settings-storage.git"
   },
   "keywords": [
     "resin",
