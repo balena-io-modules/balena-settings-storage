@@ -1,5 +1,14 @@
 m = require('mochainon')
-localStorage = require('../lib/local-storage')
+getLocalStorage = require('../lib/local-storage')
+
+IS_BROWSER = window?
+
+dataDirectory = null
+if not IS_BROWSER
+	settings = require('resin-settings-client')
+	dataDirectory = settings.get('dataDirectory')
+
+localStorage = getLocalStorage(dataDirectory)
 
 describe 'Local Storage:', ->
 

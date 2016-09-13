@@ -18,110 +18,133 @@ limitations under the License.
 /**
  * @module storage
  */
-var Promise, localStorage, _;
+var Promise, getLocalStorage, getStorage, isString;
 
 Promise = require('bluebird');
 
-_ = require('lodash');
+isString = require('lodash/isString');
 
-localStorage = require('./local-storage');
-
-
-/**
- * @summary Set a value
- * @function
- * @public
- *
- * @param {String} name - name
- * @param {*} value - value
- *
- * @return {Promise}
- *
- * @example
- * storage.set('token', '1234')
- */
-
-exports.set = function(name, value) {
-  return Promise["try"](function() {
-    if (!_.isString(value)) {
-      value = JSON.stringify(value);
-    }
-    return localStorage.setItem(name, value);
-  });
-};
+getLocalStorage = require('./local-storage');
 
 
 /**
- * @summary Get a value
+ * @summary Get an instance of storage module
  * @function
+ * @static
  * @public
  *
- * @param {String} name - name
- *
- * @return {Promise<*>} value or undefined
- *
+ * @param {Object?} options - options
+ * @param {string?} options.dataDirectory - the directory to use for storage in Node.js. Ignored in the browser.
+
+ * @return {storage}
  * @example
- * storage.get('token').then (token) ->
- * 	console.log(token)
+ * storage = require('resin-settings-storage')({
+ * 	dataDirectory: '/opt/cache/resin'
+ * })
  */
 
-exports.get = function(name) {
-  return Promise["try"](function() {
-    var result;
-    if (typeof localStorage._init === "function") {
-      localStorage._init();
-    }
-    result = localStorage.getItem(name) || void 0;
-    if (/^-?\d+\.?\d*$/.test(result)) {
-      result = parseFloat(result);
-    }
-    try {
-      result = JSON.parse(result);
-    } catch (_error) {}
-    return result;
-  }).catchReturn(void 0);
+getStorage = function(arg) {
+  var dataDirectory, get, has, localStorage, ref, remove, set;
+  dataDirectory = (ref = (arg != null ? arg : {}).dataDirectory) != null ? ref : null;
+  localStorage = getLocalStorage(dataDirectory);
+
+  /**
+  	 * @summary Set a value
+  	 * @function
+  	 * @public
+  	 *
+  	 * @param {String} name - name
+  	 * @param {*} value - value
+  	 *
+  	 * @return {Promise}
+  	 *
+  	 * @example
+  	 * storage.set('token', '1234')
+   */
+  set = function(name, value) {
+    return Promise["try"](function() {
+      if (!isString(value)) {
+        value = JSON.stringify(value);
+      }
+      return localStorage.setItem(name, value);
+    });
+  };
+
+  /**
+  	 * @summary Get a value
+  	 * @function
+  	 * @public
+  	 *
+  	 * @param {String} name - name
+  	 *
+  	 * @return {Promise<*>} value or undefined
+  	 *
+  	 * @example
+  	 * storage.get('token').then (token) ->
+  	 * 	console.log(token)
+   */
+  get = function(name) {
+    return Promise["try"](function() {
+      var result;
+      if (typeof localStorage._init === "function") {
+        localStorage._init();
+      }
+      result = localStorage.getItem(name) || void 0;
+      if (/^-?\d+\.?\d*$/.test(result)) {
+        result = parseFloat(result);
+      }
+      try {
+        result = JSON.parse(result);
+      } catch (error) {}
+      return result;
+    }).catchReturn(void 0);
+  };
+
+  /**
+  	 * @summary Check if the value exists
+  	 * @function
+  	 * @public
+  	 *
+  	 * @param {String} name - name
+  	 *
+  	 * @return {Promise<Boolean>} has value
+  	 *
+  	 * @example
+  	 * storage.has('token').then (hasToken) ->
+  	 * 	if hasToken
+  	 * 		console.log('Yes')
+  	 * 	else
+  	 * 		console.log('No')
+   */
+  has = function(name) {
+    return get(name).then(function(value) {
+      return value != null;
+    });
+  };
+
+  /**
+  	 * @summary Remove a value
+  	 * @function
+  	 * @public
+  	 *
+  	 * @param {String} name - name
+  	 *
+  	 * @return {Promise}
+  	 *
+  	 * @example
+  	 * storage.remove('token')
+   */
+  remove = function(name) {
+    return Promise["try"](function() {
+      return localStorage.removeItem(name);
+    });
+  };
+  return {
+    set: set,
+    get: get,
+    has: has,
+    remove: remove
+  };
 };
 
-
-/**
- * @summary Check if a value exists
- * @function
- * @public
- *
- * @param {String} name - name
- *
- * @return {Promise<Boolean>} has value
- *
- * @example
- * storage.has('token').then (hasToken) ->
- * 	if hasToken
- * 		console.log('Yes')
- * 	else
- * 		console.log('No')
- */
-
-exports.has = function(name) {
-  return exports.get(name).then(function(value) {
-    return value != null;
-  });
-};
-
-
-/**
- * @summary Remove a value
- * @function
- * @public
- *
- * @param {String} name - name
- *
- * @return {Promise}
- *
- * @example
- * storage.remove('token')
- */
-
-exports.remove = function(name) {
-  return Promise["try"](function() {
-    return localStorage.removeItem(name);
-  });
-};
+module.exports = getStorage;

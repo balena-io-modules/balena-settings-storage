@@ -15,11 +15,10 @@ limitations under the License.
 ###
 
 if localStorage?
-	module.exports = localStorage
+	module.exports = -> localStorage
 else
-	# Fallback to filesystem based
-	# storage if not in the browser.
-	settings = require('resin-settings-client')
+	# Fallback to filesystem based storage if not in the browser.
 	{ LocalStorage } = require('node-localstorage')
-	# Set an infinite quota
-	module.exports = new LocalStorage(settings.get('dataDirectory'), Infinity)
+	module.exports = (dataDirectory) ->
+		# Set infinite quota
+		new LocalStorage(dataDirectory, Infinity)

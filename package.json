@@ -18,31 +18,33 @@
     "test": "tests"
   },
   "scripts": {
+    "lint": "gulp lint",
     "test": "npm run test-node && npm run test-browser",
     "test-node": "gulp test",
     "test-browser": "karma start",
-    "prepublish": "npm test && gulp build",
+    "build": "gulp build",
+    "prepublish": "npm test && npm run build",
     "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
   },
   "author": "Juan Cruz Viotti <juan@resin.io>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "coffee-script": "~1.8.0",
-    "gulp": "~3.8.10",
-    "gulp-coffee": "~2.2.0",
-    "gulp-coffeelint": "~0.4.0",
-    "gulp-mocha": "~2.0.0",
-    "gulp-util": "~3.0.1",
+    "coffee-script": "~1.11.0",
+    "gulp": "^3.8.10",
+    "gulp-coffee": "^2.2.0",
+    "gulp-coffeelint": "^0.6.0",
+    "gulp-mocha": "^3.0.0",
+    "gulp-util": "^3.0.1",
     "jsdoc-to-markdown": "^1.1.1",
     "karma": "^1.2.0",
-    "mocha": "~2.0.1",
+    "mocha": "^3.0.0",
     "mochainon": "^1.0.0",
-    "resin-config-karma": "^1.0.4"
+    "resin-config-karma": "^1.0.4",
+    "resin-settings-client": "^3.5.2"
   },
   "dependencies": {
     "bluebird": "^3.3.4",
-    "lodash": "^3.10.1",
-    "node-localstorage": "^1.1.2",
-    "resin-settings-client": "^3.5.1"
+    "lodash": "^4.0.0",
+    "node-localstorage": "^1.1.2"
   }
 }
