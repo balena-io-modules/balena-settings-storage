@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2016-10-09
+
 ### Changed
 
 - **Breaking!** Disconnect this module from `resin-settings-client`. Now exports a factory method that accepts a `{ dataDirectory }` options in Node.js.
@@ -39,6 +41,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Upgrade Resin Settings Client to v3.0.0.
 
+[2.0.0]: https://github.com/resin-io-modules/resin-settings-storage/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/resin-io-modules/resin-settings-storage/compare/v1.0.4...v1.1.0
 [1.0.4]: https://github.com/resin-io-modules/resin-settings-storage/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/resin-io-modules/resin-settings-storage/compare/v1.0.2...v1.0.3
