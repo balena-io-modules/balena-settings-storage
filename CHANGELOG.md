@@ -3,11 +3,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Changed
+
+- **Breaking!** Disconnect this module from `resin-settings-client`. Now exports a factory method that accepts a `{ dataDirectory }` options in Node.js.
+- Update `lodash` to v4
+
 ## [1.1.0] - 2016-09-09
 
 ### Changed
 
-- Update resin-settings-client to make the package browser-compatible.
+- Update `resin-settings-client` to make the package browser-compatible.
 - Run test suite in the browser
 
 ## [1.0.4] - 2016-03-21

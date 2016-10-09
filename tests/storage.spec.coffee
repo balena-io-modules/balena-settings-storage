@@ -1,95 +1,93 @@
 m = require('mochainon')
 path = require('path')
-localStorage = require('../lib/local-storage')
-storage = require('../lib/storage')
+getLocalStorage = require('../lib/local-storage')
+getStorage = require('../lib/storage')
 
-IS_BROWSER = typeof window isnt 'undefined'
+IS_BROWSER = window?
 
+dataDirectory = null
 if not IS_BROWSER
 	fs = require('fs')
 	settings = require('resin-settings-client')
+	dataDirectory = settings.get('dataDirectory')
+
+localStorage = getLocalStorage(dataDirectory)
+storage = getStorage({ dataDirectory })
 
 describe 'Storage:', ->
 
 	describe 'given numbers', ->
 
-		it 'should be able to save a float number', (done) ->
+		it 'should be able to save a float number', ->
 			storage.set('pi', 3.14).then ->
 				m.chai.expect(storage.get('pi')).to.eventually.equal(3.14)
 				storage.remove('pi')
-			.nodeify(done)
 
-		it 'should be able to save an integer number', (done) ->
+		it 'should be able to save an integer number', ->
 			storage.set('age', 34).then ->
 				m.chai.expect(storage.get('age')).to.eventually.equal(34)
 				storage.remove('age')
-			.nodeify(done)
 
-		it 'should be able to save a string number containin numbers as a string', (done) ->
+		it 'should be able to save a string number containin numbers as a string', ->
 			storage.set('pi', 'pi=3.14').then ->
 				m.chai.expect(storage.get('pi')).to.eventually.equal('pi=3.14')
 				storage.remove('pi')
-			.nodeify(done)
 
 	describe 'given objects', ->
 
-		it 'should be able to save a plain object', (done) ->
+		it 'should be able to save a plain object', ->
 			storage.set('pi', value: 3.14).then ->
 				m.chai.expect(storage.get('pi')).to.eventually.become(value: 3.14)
 				storage.remove('pi')
-			.nodeify(done)
 
-		it 'should be able to save an empty object', (done) ->
+		it 'should be able to save an empty object', ->
 			storage.set('empty', {}).then ->
 				m.chai.expect(storage.get('empty')).to.eventually.become({})
 				storage.remove('empty')
-			.nodeify(done)
 
 	describe '.set()', ->
 
 		describe 'given a key does not exist', ->
 
-			beforeEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			beforeEach ->
+				storage.remove('foobar')
 
-			it 'should be able to set a value', (done) ->
+			it 'should be able to set a value', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.be.undefined
 				storage.set('foobar', 'Hello').then ->
 					m.chai.expect(storage.get('foobar')).to.eventually.equal('Hello')
 					storage.remove('foobar')
-				.nodeify(done)
 
 		describe 'given a key already exist', ->
 
-			beforeEach (done) ->
-				storage.set('foobar', 'Hello').nodeify(done)
+			beforeEach ->
+				storage.set('foobar', 'Hello')
 
-			afterEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			afterEach ->
+				storage.remove('foobar')
 
-			it 'should be able to change the value', (done) ->
+			it 'should be able to change the value', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.equal('Hello')
 				storage.set('foobar', 'World').then ->
 					m.chai.expect(storage.get('foobar')).to.eventually.equal('World')
-				.nodeify(done)
 
 	describe '.get()', ->
 
 		describe 'given a key does not exist', ->
 
-			beforeEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			beforeEach ->
+				storage.remove('foobar')
 
 			it 'should eventually be undefined', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.be.undefined
 
 		describe 'given a key already exist', ->
 
-			beforeEach (done) ->
-				storage.set('foobar', 'Hello').nodeify(done)
+			beforeEach ->
+				storage.set('foobar', 'Hello')
 
-			afterEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			afterEach ->
+				storage.remove('foobar')
 
 			it 'should eventually be the value', ->
 				m.chai.expect(storage.get('foobar')).to.eventually.equal('Hello')
@@ -112,7 +110,7 @@ describe 'Storage:', ->
 			return if IS_BROWSER
 
 			beforeEach ->
-				@path = path.join(settings.get('dataDirectory'), 'foo')
+				@path = path.join(dataDirectory, 'foo')
 				fs.writeFileSync(@path, 'hello world')
 
 			afterEach ->
@@ -125,19 +123,19 @@ describe 'Storage:', ->
 
 		describe 'given a key does not exist', ->
 
-			beforeEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			beforeEach ->
+				storage.remove('foobar')
 
 			it 'should eventually be false', ->
 				m.chai.expect(storage.has('foobar')).to.eventually.be.false
 
 		describe 'given a key already exist', ->
 
-			beforeEach (done) ->
-				storage.set('foobar', 'Hello').nodeify(done)
+			beforeEach ->
+				storage.set('foobar', 'Hello')
 
-			afterEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			afterEach ->
+				storage.remove('foobar')
 
 			it 'should eventually be true', ->
 				m.chai.expect(storage.has('foobar')).to.eventually.be.true
@@ -146,25 +144,23 @@ describe 'Storage:', ->
 
 		describe 'given a key does not exist', ->
 
-			beforeEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			beforeEach ->
+				storage.remove('foobar')
 
-			it 'should do nothing', (done) ->
+			it 'should do nothing', ->
 				m.chai.expect(storage.has('foobar')).to.eventually.be.false
 				storage.remove('foobar').then ->
 					m.chai.expect(storage.has('foobar')).to.eventually.be.false
-				.nodeify(done)
 
 		describe 'given a key already exist', ->
 
-			beforeEach (done) ->
-				storage.set('foobar', 'Hello').nodeify(done)
+			beforeEach ->
+				storage.set('foobar', 'Hello')
 
-			afterEach (done) ->
-				storage.remove('foobar').nodeify(done)
+			afterEach ->
+				storage.remove('foobar')
 
-			it 'should remove the key', (done) ->
+			it 'should remove the key', ->
 				m.chai.expect(storage.has('foobar')).to.eventually.be.true
 				storage.remove('foobar').then ->
 					m.chai.expect(storage.has('foobar')).to.eventually.be.false
-				.nodeify(done)

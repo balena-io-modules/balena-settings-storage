@@ -14,12 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-var LocalStorage, settings;
+var LocalStorage;
 
 if (typeof localStorage !== "undefined" && localStorage !== null) {
-  module.exports = localStorage;
+  module.exports = function() {
+    return localStorage;
+  };
 } else {
-  settings = require('resin-settings-client');
   LocalStorage = require('node-localstorage').LocalStorage;
-  module.exports = new LocalStorage(settings.get('dataDirectory'), Infinity);
+  module.exports = function(dataDirectory) {
+    return new LocalStorage(dataDirectory, 2e308);
+  };
 }

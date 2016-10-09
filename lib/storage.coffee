@@ -19,97 +19,120 @@ limitations under the License.
 ###
 
 Promise = require('bluebird')
-_ = require('lodash')
-localStorage = require('./local-storage')
+isString = require('lodash/isString')
+getLocalStorage = require('./local-storage')
 
 ###*
-# @summary Set a value
+# @summary Get an instance of storage module
 # @function
+# @static
 # @public
 #
-# @param {String} name - name
-# @param {*} value - value
-#
-# @return {Promise}
-#
+# @param {Object?} options - options
+# @param {string?} options.dataDirectory - the directory to use for storage in Node.js. Ignored in the browser.
+
+# @return {storage}
 # @example
-# storage.set('token', '1234')
+# storage = require('resin-settings-storage')({
+# 	dataDirectory: '/opt/cache/resin'
+# })
 ###
-exports.set = (name, value) ->
-	Promise.try ->
-		if not _.isString(value)
-			value = JSON.stringify(value)
-		localStorage.setItem(name, value)
+getStorage = ({ dataDirectory = null } = {}) ->
 
-###*
-# @summary Get a value
-# @function
-# @public
-#
-# @param {String} name - name
-#
-# @return {Promise<*>} value or undefined
-#
-# @example
-# storage.get('token').then (token) ->
-# 	console.log(token)
-###
-exports.get = (name) ->
-	Promise.try ->
+	localStorage = getLocalStorage(dataDirectory)
 
-		# Run `node-localstorage` constructor to update
-		# internal cache of saved files.
-		# Without this, external changes to the data
-		# directory (with `fs` for example) will not
-		# be detected by `node-localstorage`.
-		localStorage._init?()
+	###*
+	# @summary Set a value
+	# @function
+	# @public
+	#
+	# @param {String} name - name
+	# @param {*} value - value
+	#
+	# @return {Promise}
+	#
+	# @example
+	# storage.set('token', '1234')
+	###
+	set = (name, value) ->
+		Promise.try ->
+			if not isString(value)
+				value = JSON.stringify(value)
+			localStorage.setItem(name, value)
 
-		result = localStorage.getItem(name) or undefined
+	###*
+	# @summary Get a value
+	# @function
+	# @public
+	#
+	# @param {String} name - name
+	#
+	# @return {Promise<*>} value or undefined
+	#
+	# @example
+	# storage.get('token').then (token) ->
+	# 	console.log(token)
+	###
+	get = (name) ->
+		Promise.try ->
 
-		if /^-?\d+\.?\d*$/.test(result)
-			result = parseFloat(result)
+			# Run `node-localstorage` constructor to update
+			# internal cache of saved files.
+			# Without this, external changes to the data
+			# directory (with `fs` for example) will not
+			# be detected by `node-localstorage`.
+			localStorage._init?()
 
-		try
-			result = JSON.parse(result)
+			result = localStorage.getItem(name) or undefined
 
-		return result
+			if /^-?\d+\.?\d*$/.test(result)
+				result = parseFloat(result)
 
-	# getItem() throws a ENOENT error in
-	# NodeJS if the file doesn't exist.
-	.catchReturn(undefined)
+			try
+				result = JSON.parse(result)
 
-###*
-# @summary Check if a value exists
-# @function
-# @public
-#
-# @param {String} name - name
-#
-# @return {Promise<Boolean>} has value
-#
-# @example
-# storage.has('token').then (hasToken) ->
-# 	if hasToken
-# 		console.log('Yes')
-# 	else
-# 		console.log('No')
-###
-exports.has = (name) ->
-	exports.get(name).then (value) ->
-		return value?
+			return result
 
-###*
-# @summary Remove a value
-# @function
-# @public
-#
-# @param {String} name - name
-#
-# @return {Promise}
-#
-# @example
-# storage.remove('token')
-###
-exports.remove = (name) ->
-	Promise.try ->
-		localStorage.removeItem(name)
+		# getItem() throws a ENOENT error in
+		# NodeJS if the file doesn't exist.
+		.catchReturn(undefined)
+
+	###*
+	# @summary Check if the value exists
+	# @function
+	# @public
+	#
+	# @param {String} name - name
+	#
+	# @return {Promise<Boolean>} has value
+	#
+	# @example
+	# storage.has('token').then (hasToken) ->
+	# 	if hasToken
+	# 		console.log('Yes')
+	# 	else
+	# 		console.log('No')
+	###
+	has = (name) ->
+		get(name).then (value) ->
+			return value?
+
+	###*
+	# @summary Remove a value
+	# @function
+	# @public
+	#
+	# @param {String} name - name
+	#
+	# @return {Promise}
+	#
+	# @example
+	# storage.remove('token')
+	###
+	remove = (name) ->
+		Promise.try ->
+			localStorage.removeItem(name)
+
+	return { set, get, has, remove }
+
+module.exports = getStorage

@@ -33,15 +33,36 @@ Documentation
 
 
 * [storage](#module_storage)
-    * [.set(name, value)](#module_storage.set) ⇒ <code>Promise</code>
-    * [.get(name)](#module_storage.get) ⇒ <code>Promise.&lt;\*&gt;</code>
-    * [.has(name)](#module_storage.has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.remove(name)](#module_storage.remove) ⇒ <code>Promise</code>
+    * _static_
+        * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
+    * _inner_
+        * [~set(name, value)](#module_storage..set) ⇒ <code>Promise</code>
+        * [~get(name)](#module_storage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
+        * [~has(name)](#module_storage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [~remove(name)](#module_storage..remove) ⇒ <code>Promise</code>
 
-<a name="module_storage.set"></a>
+<a name="module_storage.getStorage"></a>
 
-### storage.set(name, value) ⇒ <code>Promise</code>
+### storage.getStorage(options) ⇒ <code>storage</code>
 **Kind**: static method of <code>[storage](#module_storage)</code>  
+**Summary**: Get an instance of storage module  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | options |
+| options.dataDirectory | <code>string</code> | the directory to use for storage in Node.js. Ignored in the browser. |
+
+**Example**  
+```js
+storage = require('resin-settings-storage')({
+	dataDirectory: '/opt/cache/resin'
+})
+```
+<a name="module_storage..set"></a>
+
+### storage~set(name, value) ⇒ <code>Promise</code>
+**Kind**: inner method of <code>[storage](#module_storage)</code>  
 **Summary**: Set a value  
 **Access:** public  
 
@@ -54,10 +75,10 @@ Documentation
 ```js
 storage.set('token', '1234')
 ```
-<a name="module_storage.get"></a>
+<a name="module_storage..get"></a>
 
-### storage.get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
-**Kind**: static method of <code>[storage](#module_storage)</code>  
+### storage~get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
+**Kind**: inner method of <code>[storage](#module_storage)</code>  
 **Summary**: Get a value  
 **Returns**: <code>Promise.&lt;\*&gt;</code> - value or undefined  
 **Access:** public  
@@ -71,11 +92,11 @@ storage.set('token', '1234')
 storage.get('token').then (token) ->
 	console.log(token)
 ```
-<a name="module_storage.has"></a>
+<a name="module_storage..has"></a>
 
-### storage.has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-**Kind**: static method of <code>[storage](#module_storage)</code>  
-**Summary**: Check if a value exists  
+### storage~has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+**Kind**: inner method of <code>[storage](#module_storage)</code>  
+**Summary**: Check if the value exists  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - has value  
 **Access:** public  
 
@@ -91,10 +112,10 @@ storage.has('token').then (hasToken) ->
 	else
 		console.log('No')
 ```
-<a name="module_storage.remove"></a>
+<a name="module_storage..remove"></a>
 
-### storage.remove(name) ⇒ <code>Promise</code>
-**Kind**: static method of <code>[storage](#module_storage)</code>  
+### storage~remove(name) ⇒ <code>Promise</code>
+**Kind**: inner method of <code>[storage](#module_storage)</code>  
 **Summary**: Remove a value  
 **Access:** public  
 
@@ -130,7 +151,7 @@ Contribute
 Before submitting a PR, please make sure that you include tests, and that [coffeelint](http://www.coffeelint.org/) runs without any warning:
 
 ```sh
-$ gulp lint
+$ npm run lint
 ```
 
 License
