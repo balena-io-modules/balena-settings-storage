@@ -14,8 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ###
 
+prefixed = (key) -> 'resin-' + key
+
 if localStorage?
-	module.exports = -> localStorage
+	module.exports = ->
+		getItem: (key) -> localStorage.getItem(prefixed(key))
+		setItem: (key, value) -> localStorage.setItem(prefixed(key), value)
+		removeItem: (key) -> localStorage.removeItem(prefixed(key))
+		clear: -> localStorage.clear()
+
 else
 	# Fallback to filesystem based storage if not in the browser.
 	{ LocalStorage } = require('node-localstorage')

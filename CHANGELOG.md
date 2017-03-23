@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Changed
+
+- **Breaking!** Prefix localStorage keys in the browser with `resin-`. This will lose all existing stored values.
+
 ## [2.0.0] - 2016-10-09
 
 ### Changed
