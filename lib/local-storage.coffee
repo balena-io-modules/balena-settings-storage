@@ -16,12 +16,61 @@ limitations under the License.
 
 prefixed = (key) -> 'resin-' + key
 
-if localStorage?
-	module.exports = ->
-		getItem: (key) -> localStorage.getItem(prefixed(key))
-		setItem: (key, value) -> localStorage.setItem(prefixed(key), value)
-		removeItem: (key) -> localStorage.removeItem(prefixed(key))
-		clear: -> localStorage.clear()
+createVirtualStore = ->
+	_store = {}
+
+	getItem: (key) ->
+		return if _store.hasOwnProperty(key) then _store[key] else null
+	setItem: (key, value) ->
+		_store[key] = value
+		return
+	removeItem: (key) ->
+		delete _store[key]
+		return
+	clear: ->
+		_store = {}
+		return
+
+
+
+# Inspired by https://github.com/gsklee/ngStorage
+isStorageSupported = ($window, storageType) ->
+	# Some installations of IE, for an unknown reason, throw "SCRIPT5: Error: Access is denied"
+	# when accessing window.localStorage. This happens before you try to do anything with it. Catch
+	# that error and allow execution to continue.
+
+	# fix 'SecurityError: DOM Exception 18' exception in Desktop Safari, Mobile Safari
+	# when "Block cookies": "Always block" is turned on
+	try
+		supported = $window[storageType]
+	catch err
+		supported = false
+
+	# When Safari (OS X or iOS) is in private browsing mode, it appears as though localStorage and sessionStorage
+	# is available, but trying to call .setItem throws an exception below:
+	# "QUOTA_EXCEEDED_ERR: DOM Exception 22: An attempt was made to add something to storage that exceeded the quota."
+	if supported
+		key = '__' + Math.round(Math.random() * 1e7)
+		try
+			$window[storageType].setItem(key, key)
+			supported = $window[storageType].getItem(key) is key
+			$window[storageType].removeItem(key, key)
+		catch err
+			supported = false
+
+	return supported
+
+noop = ->
+
+if window?
+	if isStorageSupported(window, 'localStorage')
+		module.exports = ->
+			getItem: (key) -> localStorage.getItem(prefixed(key))
+			setItem: (key, value) -> localStorage.setItem(prefixed(key), value)
+			removeItem: (key) -> localStorage.removeItem(prefixed(key))
+			clear: -> localStorage.clear()
+	else
+		module.exports = -> createVirtualStore()
 
 else
 	# Fallback to filesystem based storage if not in the browser.
