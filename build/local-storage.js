@@ -15,29 +15,82 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-var LocalStorage, prefixed;
+var LocalStorage, createVirtualStore, isStorageSupported, noop, prefixed;
 
 prefixed = function(key) {
   return 'resin-' + key;
 };
 
-if (typeof localStorage !== "undefined" && localStorage !== null) {
-  module.exports = function() {
-    return {
-      getItem: function(key) {
-        return localStorage.getItem(prefixed(key));
-      },
-      setItem: function(key, value) {
-        return localStorage.setItem(prefixed(key), value);
-      },
-      removeItem: function(key) {
-        return localStorage.removeItem(prefixed(key));
-      },
-      clear: function() {
-        return localStorage.clear();
+createVirtualStore = function() {
+  var _store;
+  _store = {};
+  return {
+    getItem: function(key) {
+      if (_store.hasOwnProperty(key)) {
+        return _store[key];
+      } else {
+        return null;
       }
-    };
+    },
+    setItem: function(key, value) {
+      _store[key] = value;
+    },
+    removeItem: function(key) {
+      delete _store[key];
+    },
+    clear: function() {
+      _store = {};
+    }
   };
+};
+
+isStorageSupported = function($window, storageType) {
+  var err, key, supported;
+  try {
+    supported = $window[storageType];
+  } catch (error) {
+    err = error;
+    supported = false;
+  }
+  if (supported) {
+    key = '__' + Math.round(Math.random() * 1e7);
+    try {
+      $window[storageType].setItem(key, key);
+      supported = $window[storageType].getItem(key) === key;
+      $window[storageType].removeItem(key, key);
+    } catch (error) {
+      err = error;
+      supported = false;
+    }
+  }
+  return supported;
+};
+
+noop = function() {};
+
+if (typeof window !== "undefined" && window !== null) {
+  if (isStorageSupported(window, 'localStorage')) {
+    module.exports = function() {
+      return {
+        getItem: function(key) {
+          return localStorage.getItem(prefixed(key));
+        },
+        setItem: function(key, value) {
+          return localStorage.setItem(prefixed(key), value);
+        },
+        removeItem: function(key) {
+          return localStorage.removeItem(prefixed(key));
+        },
+        clear: function() {
+          return localStorage.clear();
+        }
+      };
+    };
+  } else {
+    module.exports = function() {
+      return createVirtualStore();
+    };
+  }
 } else {
   LocalStorage = require('node-localstorage').LocalStorage;
   module.exports = function(dataDirectory) {
