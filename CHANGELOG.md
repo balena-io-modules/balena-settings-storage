@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Changed
+
+- **Breaking!** Drop support for Node < 6
+- Converted the sources to TypeScript
+- Run browser tests in Chrome headless
+
 ## [3.0.1] - 2017-04-20
 
 ### Changed

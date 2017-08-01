@@ -33,20 +33,19 @@ Documentation
 
 
 * [storage](#module_storage)
-    * _static_
-        * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
-    * _inner_
-        * [~set(name, value)](#module_storage..set) ⇒ <code>Promise</code>
-        * [~get(name)](#module_storage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
-        * [~has(name)](#module_storage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-        * [~remove(name)](#module_storage..remove) ⇒ <code>Promise</code>
+    * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
+        * [~set(name, value)](#module_storage.getStorage..set) ⇒ <code>Promise</code>
+        * [~get(name)](#module_storage.getStorage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
+        * [~has(name)](#module_storage.getStorage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [~remove(name)](#module_storage.getStorage..remove) ⇒ <code>Promise</code>
+        * [~clear()](#module_storage.getStorage..clear) ⇒ <code>Promise</code>
 
 <a name="module_storage.getStorage"></a>
 
 ### storage.getStorage(options) ⇒ <code>storage</code>
-**Kind**: static method of <code>[storage](#module_storage)</code>  
+**Kind**: static method of [<code>storage</code>](#module_storage)  
 **Summary**: Get an instance of storage module  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -55,16 +54,24 @@ Documentation
 
 **Example**  
 ```js
-storage = require('resin-settings-storage')({
+const storage = require('resin-settings-storage')({
 	dataDirectory: '/opt/cache/resin'
 })
 ```
-<a name="module_storage..set"></a>
 
-### storage~set(name, value) ⇒ <code>Promise</code>
-**Kind**: inner method of <code>[storage](#module_storage)</code>  
+* [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
+    * [~set(name, value)](#module_storage.getStorage..set) ⇒ <code>Promise</code>
+    * [~get(name)](#module_storage.getStorage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [~has(name)](#module_storage.getStorage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [~remove(name)](#module_storage.getStorage..remove) ⇒ <code>Promise</code>
+    * [~clear()](#module_storage.getStorage..clear) ⇒ <code>Promise</code>
+
+<a name="module_storage.getStorage..set"></a>
+
+#### getStorage~set(name, value) ⇒ <code>Promise</code>
+**Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Set a value  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -75,13 +82,13 @@ storage = require('resin-settings-storage')({
 ```js
 storage.set('token', '1234')
 ```
-<a name="module_storage..get"></a>
+<a name="module_storage.getStorage..get"></a>
 
-### storage~get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
-**Kind**: inner method of <code>[storage](#module_storage)</code>  
+#### getStorage~get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
+**Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Get a value  
 **Returns**: <code>Promise.&lt;\*&gt;</code> - value or undefined  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -89,16 +96,17 @@ storage.set('token', '1234')
 
 **Example**  
 ```js
-storage.get('token').then (token) ->
+storage.get('token').then((token) => {
 	console.log(token)
+});
 ```
-<a name="module_storage..has"></a>
+<a name="module_storage.getStorage..has"></a>
 
-### storage~has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-**Kind**: inner method of <code>[storage](#module_storage)</code>  
+#### getStorage~has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+**Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Check if the value exists  
 **Returns**: <code>Promise.&lt;Boolean&gt;</code> - has value  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -106,18 +114,19 @@ storage.get('token').then (token) ->
 
 **Example**  
 ```js
-storage.has('token').then (hasToken) ->
-	if hasToken
+storage.has('token').then((hasToken) => {
+	if (hasToken) {
 		console.log('Yes')
-	else
+	} else {
 		console.log('No')
+});
 ```
-<a name="module_storage..remove"></a>
+<a name="module_storage.getStorage..remove"></a>
 
-### storage~remove(name) ⇒ <code>Promise</code>
-**Kind**: inner method of <code>[storage](#module_storage)</code>  
+#### getStorage~remove(name) ⇒ <code>Promise</code>
+**Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Remove a value  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -126,6 +135,16 @@ storage.has('token').then (hasToken) ->
 **Example**  
 ```js
 storage.remove('token')
+```
+<a name="module_storage.getStorage..clear"></a>
+
+#### getStorage~clear() ⇒ <code>Promise</code>
+**Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
+**Summary**: Remove all values  
+**Access**: public  
+**Example**  
+```js
+storage.clear()
 ```
 
 Support
