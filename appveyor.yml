@@ -11,13 +11,12 @@ cache:
 # what combinations to test
 environment:
   matrix:
+    - nodejs_version: 'stable'
     - nodejs_version: 6
-    - nodejs_version: 4
 
 install:
   - ps: Install-Product node $env:nodejs_version x64
-  - npm install -g npm
-  - npm install -g gulp
+  - npm install -g npm@4
   - npm install
 
 build: off
