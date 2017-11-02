@@ -1,6 +1,6 @@
 {
   "name": "resin-settings-storage",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Resin.io settings storage utilities",
   "main": "build/storage.js",
   "types": "lib/storage.ts",
@@ -42,7 +42,7 @@
     "rimraf": "^2.6.1",
     "require-npm4-to-publish": "^1.0.0",
     "resin-config-karma": "^2.0.0",
-    "resin-settings-client": "^3.7.0",
+    "resin-settings-client": "^3.8.1",
     "ts-node": "^3.3.0",
     "tslint": "^5.5.0",
     "typescript": "2.4.2"
