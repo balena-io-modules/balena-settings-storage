@@ -18,20 +18,20 @@ buildSteps: &buildSteps
 jobs:
   "node-6":
     docker:
-      - image: circleci/node:6
+      - image: circleci/node:6-browsers
     working_directory: ~/node-6
     steps: *buildSteps
 
   "node-8":
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8-browsers
     working_directory: ~/node-8
     steps: *buildSteps
 
   deploy:
     # For this to work NPM_TOKEN must be set for the account used for publishing
     docker:
-      - image: circleci/node:6
+      - image: circleci/node:6-browsers
     steps:
       - attach_workspace:
           at: $CIRCLE_WORKING_DIRECTORY
