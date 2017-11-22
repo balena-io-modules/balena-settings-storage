@@ -1,6 +1,6 @@
 {
   "name": "resin-settings-storage",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Resin.io settings storage utilities",
   "main": "build/storage.js",
   "types": "lib/storage.ts",
