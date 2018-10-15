@@ -1,7 +1,7 @@
+import * as BalenaSettingsClientModule from 'balena-settings-client';
 import * as FsModule from 'fs';
 import * as m from 'mochainon';
 import * as path from 'path';
-import * as ResinSettingsClientModule from 'resin-settings-client';
 
 import getLocalStorage = require('../lib/local-storage');
 import getStorage = require('../lib/storage');
@@ -13,7 +13,7 @@ let fs: typeof FsModule;
 if (!IS_BROWSER) {
 	// tslint:disable no-var-requires
 	fs = require('fs');
-	const settings: typeof ResinSettingsClientModule = require('resin-settings-client');
+	const settings: typeof BalenaSettingsClientModule = require('balena-settings-client');
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 

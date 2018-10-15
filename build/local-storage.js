@@ -1,6 +1,6 @@
 "use strict";
 /*
-Copyright 2016-17 Resin.io
+Copyright 2016-17 Balena
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-var prefixed = function (key) { return "resin-" + key; };
+var prefixed = function (key) { return "balena-" + key; };
 var createVirtualStore = function () {
     var _store = {};
     return {
