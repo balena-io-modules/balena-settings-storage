@@ -1,6 +1,6 @@
 {
   "name": "balena-settings-storage",
-  "version": "4.0.3",
+  "version": "5.0.0",
   "description": "Balena settings storage utilities",
   "main": "build/storage.js",
   "types": "lib/storage.ts",
