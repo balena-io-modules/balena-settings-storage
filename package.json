@@ -41,7 +41,7 @@
     "prettier": "^1.5.3",
     "rimraf": "^2.6.1",
     "require-npm4-to-publish": "^1.0.0",
-    "resin-config-karma": "^2.0.0",
+    "balena-config-karma": "^2.0.0",
     "balena-settings-client": "^4.0.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.5.0",

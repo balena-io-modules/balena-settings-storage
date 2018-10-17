@@ -1,5 +1,5 @@
 const packageJSON = require('./package.json')
-const getKarmaConfig = require('resin-config-karma')
+const getKarmaConfig = require('balena-config-karma')
 
 module.exports = (config) => {
 	const karmaConfig = getKarmaConfig(packageJSON)
