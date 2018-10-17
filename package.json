@@ -1,16 +1,16 @@
 {
-  "name": "resin-settings-storage",
+  "name": "balena-settings-storage",
   "version": "4.0.3",
-  "description": "Resin.io settings storage utilities",
+  "description": "Balena settings storage utilities",
   "main": "build/storage.js",
   "types": "lib/storage.ts",
-  "homepage": "https://github.com/resin-io-modules/resin-settings-storage",
+  "homepage": "https://github.com/balena-io-modules/balena-settings-storage",
   "repository": {
     "type": "git",
-    "url": "git://github.com/resin-io-modules/resin-settings-storage.git"
+    "url": "git://github.com/balena-io-modules/balena-settings-storage.git"
   },
   "keywords": [
-    "resin",
+    "balena",
     "data",
     "storage",
     "settings"
@@ -29,7 +29,7 @@
     "prettify": "prettier --use-tabs --single-quote --write \"lib/**/*.ts\" \"tests/**/*.ts\"",
     "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
   },
-  "author": "Juan Cruz Viotti <juan@resin.io>",
+  "author": "Juan Cruz Viotti <juan@balena.io>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@resin.io/types-mochainon": "^2.0.1",
@@ -41,11 +41,11 @@
     "prettier": "^1.5.3",
     "rimraf": "^2.6.1",
     "require-npm4-to-publish": "^1.0.0",
-    "resin-config-karma": "^2.0.0",
-    "resin-settings-client": "^3.8.1",
+    "balena-config-karma": "^2.0.0",
+    "balena-settings-client": "^4.0.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.5.0",
-    "typescript": "2.4.2"
+    "typescript": "3.1.3"
   },
   "dependencies": {
     "@resin.io/types-node-localstorage": "^1.3.0",

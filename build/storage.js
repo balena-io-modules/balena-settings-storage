@@ -1,6 +1,6 @@
 "use strict";
 /*
-Copyright 2016 Resin.io
+Copyright 2016 Balena
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ var getLocalStorage = require("./local-storage");
  *
  * @return {storage}
  * @example
- * const storage = require('resin-settings-storage')({
- * 	dataDirectory: '/opt/cache/resin'
+ * const storage = require('balena-settings-storage')({
+ * 	dataDirectory: '/opt/cache/balena'
  * })
  */
 var getStorage = function (_a) {

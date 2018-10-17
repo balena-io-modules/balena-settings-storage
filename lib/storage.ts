@@ -1,5 +1,5 @@
 /*
-Copyright 2016 Resin.io
+Copyright 2016 Balena
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ limitations under the License.
 
 import * as Promise from 'bluebird';
 import getLocalStorage = require('./local-storage');
-import { ResinSettingsStorage } from './types';
+import { BalenaSettingsStorage } from './types';
 
 /**
  * @summary Get an instance of storage module
@@ -33,13 +33,13 @@ import { ResinSettingsStorage } from './types';
  *
  * @return {storage}
  * @example
- * const storage = require('resin-settings-storage')({
- * 	dataDirectory: '/opt/cache/resin'
+ * const storage = require('balena-settings-storage')({
+ * 	dataDirectory: '/opt/cache/balena'
  * })
  */
 const getStorage = (
 	{ dataDirectory }: { dataDirectory?: string } = {}
-): ResinSettingsStorage => {
+): BalenaSettingsStorage => {
 	const localStorage = getLocalStorage(dataDirectory);
 
 	/**
