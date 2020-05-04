@@ -35,7 +35,7 @@ const createVirtualStore = () => {
 		},
 		clear() {
 			_store = {};
-		}
+		},
 	};
 };
 
@@ -97,7 +97,7 @@ if (typeof window !== 'undefined') {
 			},
 			clear() {
 				return localStorage.clear();
-			}
+			},
 		});
 	} else {
 		createStorage = createVirtualStore;
