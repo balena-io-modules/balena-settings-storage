@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "Balena settings storage utilities",
   "main": "build/storage.js",
-  "types": "lib/storage.ts",
+  "types": "build/storage.d.ts",
   "homepage": "https://github.com/balena-io-modules/balena-settings-storage",
   "repository": {
     "type": "git",
