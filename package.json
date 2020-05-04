@@ -25,7 +25,7 @@
     "test": "npm run build && npm run lint && npm run test:node && npm run test:browser",
     "build": "rimraf ./build && npm run prettify && tsc && npm run readme",
     "prepublish": "require-npm4-to-publish",
-    "prepublishOnly": "npm test",
+    "prepack": "npm run build",
     "prettify": "prettier --use-tabs --single-quote --write \"lib/**/*.ts\" \"tests/**/*.ts\"",
     "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
   },
