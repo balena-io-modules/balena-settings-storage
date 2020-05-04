@@ -37,9 +37,9 @@ import { BalenaSettingsStorage } from './types';
  * 	dataDirectory: '/opt/cache/balena'
  * })
  */
-const getStorage = (
-	{ dataDirectory }: { dataDirectory?: string } = {}
-): BalenaSettingsStorage => {
+const getStorage = ({
+	dataDirectory,
+}: { dataDirectory?: string } = {}): BalenaSettingsStorage => {
 	const localStorage = getLocalStorage(dataDirectory);
 
 	/**

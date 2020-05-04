@@ -10,3 +10,4 @@ pids
 node_modules
 
 .vscode
+/build

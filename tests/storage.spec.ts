@@ -88,7 +88,7 @@ describe('Storage:', () => {
 					.to.eventually.equal('Hello')
 					.then(() => storage.set('foobar', 'World'))
 					.then(() =>
-						m.chai.expect(storage.get('foobar')).to.eventually.equal('World')
+						m.chai.expect(storage.get('foobar')).to.eventually.equal('World'),
 					);
 			});
 		});
@@ -162,7 +162,7 @@ describe('Storage:', () => {
 				return storage
 					.remove('foobar')
 					.then(() =>
-						m.chai.expect(storage.has('foobar')).to.eventually.equal(false)
+						m.chai.expect(storage.has('foobar')).to.eventually.equal(false),
 					);
 			});
 		});
@@ -176,7 +176,7 @@ describe('Storage:', () => {
 					.to.eventually.equal(true)
 					.then(() => storage.remove('foobar'))
 					.then(() =>
-						m.chai.expect(storage.has('foobar')).to.eventually.equal(false)
+						m.chai.expect(storage.has('foobar')).to.eventually.equal(false),
 					);
 			});
 		});
