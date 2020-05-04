@@ -11,19 +11,25 @@ buildSteps: &buildSteps
       command: npm test
 
 jobs:
-  "node-6":
-    docker:
-      - image: circleci/node:6-browsers
-    steps: *buildSteps
-
   "node-8":
     docker:
       - image: circleci/node:8-browsers
+    steps: *buildSteps
+
+  "node-10":
+    docker:
+      - image: circleci/node:10-browsers
+    steps: *buildSteps
+
+  "node-12":
+    docker:
+      - image: circleci/node:12-browsers
     steps: *buildSteps
 
 workflows:
   version: 2
   build:
     jobs:
-      - "node-6"
       - "node-8"
+      - "node-10"
+      - "node-12"
