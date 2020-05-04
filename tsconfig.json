@@ -15,7 +15,8 @@
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@resin.io"
-    ]
+    ],
+    "declaration": true
   },
   "include": [
     "lib/**/*.ts"
