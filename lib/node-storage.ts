@@ -14,18 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { mkdir, readdir, readFile, rmdir, stat, unlink, writeFile } from 'fs';
+import { promises as fs } from 'fs';
 import * as path from 'path';
-import { promisify } from 'util';
 import { StorageLike } from './local-storage';
-
-const mkdirAsync = promisify(mkdir);
-const readFileAsync = promisify(readFile);
-const readdirAsync = promisify(readdir);
-const rmdirAsync = promisify(rmdir);
-const statAsync = promisify(stat);
-const writeFileAsync = promisify(writeFile);
-const unlinkAsync = promisify(unlink);
 
 export class NodeStorage implements StorageLike {
 	private initialized = false;
@@ -37,7 +28,7 @@ export class NodeStorage implements StorageLike {
 		}
 		this.initialized = true;
 		try {
-			await mkdirAsync(this.dataDirectory);
+			await fs.mkdir(this.dataDirectory);
 		} catch {
 			// ignore if it already exists
 		}
@@ -49,13 +40,13 @@ export class NodeStorage implements StorageLike {
 	public async clear() {
 		try {
 			await Promise.all(
-				(await readdirAsync(this.dataDirectory)).map(async f => {
+				(await fs.readdir(this.dataDirectory)).map(async f => {
 					f = path.join(this.dataDirectory, f);
 					try {
-						if ((await statAsync(f)).isDirectory()) {
-							await rmdirAsync(f);
+						if ((await fs.stat(f)).isDirectory()) {
+							await fs.rmdir(f);
 						} else {
-							await unlinkAsync(f);
+							await fs.unlink(f);
 						}
 					} catch {
 						// ignore
@@ -68,18 +59,18 @@ export class NodeStorage implements StorageLike {
 	}
 	public async getItem(key: string) {
 		try {
-			return await readFileAsync(this.getPath(key), 'utf8');
+			return await fs.readFile(this.getPath(key), 'utf8');
 		} catch {
 			return null;
 		}
 	}
 	public async setItem(key: string, data: string) {
 		await this.init();
-		await writeFileAsync(this.getPath(key), data, 'utf8');
+		await fs.writeFile(this.getPath(key), data, 'utf8');
 	}
 	public async removeItem(key: string) {
 		try {
-			await unlinkAsync(this.getPath(key));
+			await fs.unlink(this.getPath(key));
 		} catch (e) {
 			// ignore
 		}
