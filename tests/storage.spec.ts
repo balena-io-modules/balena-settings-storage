@@ -3,7 +3,7 @@ import * as FsModule from 'fs';
 import * as m from 'mochainon';
 import * as path from 'path';
 
-import getLocalStorage = require('../lib/local-storage');
+import { createStorage } from '../lib/local-storage';
 import getStorage = require('../lib/storage');
 
 const IS_BROWSER = typeof window !== 'undefined';
@@ -17,19 +17,15 @@ if (!IS_BROWSER) {
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 
-const localStorage = getLocalStorage(dataDirectory);
+const localStorage = createStorage(dataDirectory);
 const storage = getStorage({ dataDirectory });
 
 // tslint:disable no-unused-expression
 
 describe('Storage:', () => {
-	beforeEach(() => {
-		storage.clear();
-	});
+	beforeEach(() => storage.clear());
 
-	after(() => {
-		storage.clear();
-	});
+	after(() => storage.clear());
 
 	describe('given numbers', () => {
 		it('should be able to save a float number', () =>

@@ -18,8 +18,7 @@ limitations under the License.
  * @module storage
  */
 
-import * as Promise from 'bluebird';
-import getLocalStorage = require('./local-storage');
+import { createStorage } from './local-storage';
 import { BalenaSettingsStorage } from './types';
 
 /**
@@ -40,7 +39,7 @@ import { BalenaSettingsStorage } from './types';
 const getStorage = ({
 	dataDirectory,
 }: { dataDirectory?: string } = {}): BalenaSettingsStorage => {
-	const localStorage = getLocalStorage(dataDirectory);
+	const localStorage = createStorage(dataDirectory);
 
 	/**
 	 * @summary Set a value
@@ -55,13 +54,12 @@ const getStorage = ({
 	 * @example
 	 * storage.set('token', '1234')
 	 */
-	const set = (name: string, value: any) =>
-		Promise.try(() => {
-			if (typeof value !== 'string') {
-				value = JSON.stringify(value);
-			}
-			return localStorage.setItem(name, value);
-		});
+	const set = async (name: string, value: any) => {
+		if (typeof value !== 'string') {
+			value = JSON.stringify(value);
+		}
+		return localStorage.setItem(name, value);
+	};
 
 	/**
 	 * @summary Get a value
@@ -77,18 +75,11 @@ const getStorage = ({
 	 * 	console.log(token)
 	 * });
 	 */
-	const get = (name: string): Promise<string | number | object | undefined> =>
-		Promise.try(() => {
-			// Run `node-localstorage` constructor to update
-			// internal cache of saved files.
-			// Without this, external changes to the data
-			// directory (with `fs` for example) will not
-			// be detected by `node-localstorage`.
-			if (typeof localStorage._init === 'function') {
-				localStorage._init();
-			}
-
-			const result = localStorage.getItem(name);
+	const get = async (
+		name: string,
+	): Promise<string | number | object | undefined> => {
+		try {
+			const result = await localStorage.getItem(name);
 
 			if (result == null) {
 				return undefined;
@@ -105,7 +96,10 @@ const getStorage = ({
 			}
 
 			return result;
-		}).catchReturn(undefined);
+		} catch {
+			return undefined;
+		}
+	};
 
 	/**
 	 * @summary Check if the value exists
@@ -124,7 +118,10 @@ const getStorage = ({
 	 * 		console.log('No')
 	 * });
 	 */
-	const has = (name: string) => get(name).then(value => value != null);
+	const has = async (name: string) => {
+		const value = await get(name);
+		return value != null;
+	};
 
 	/**
 	 * @summary Remove a value
@@ -138,8 +135,7 @@ const getStorage = ({
 	 * @example
 	 * storage.remove('token')
 	 */
-	const remove = (name: string) =>
-		Promise.try(() => localStorage.removeItem(name));
+	const remove = async (name: string) => localStorage.removeItem(name);
 
 	/**
 	 * @summary Remove all values
@@ -152,7 +148,7 @@ const getStorage = ({
 	 * @example
 	 * storage.clear()
 	 */
-	const clear = () => Promise.try(() => localStorage.clear());
+	const clear = async () => localStorage.clear();
 
 	return { set, get, has, remove, clear };
 };

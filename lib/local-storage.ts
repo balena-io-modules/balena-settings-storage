@@ -73,12 +73,11 @@ const isStorageSupported = ($window: Window, storageType: StorageType) => {
 	return supported;
 };
 
-interface StorageLike {
-	_init?: () => void;
-	clear(): void;
-	getItem(key: string): string | null;
-	setItem(key: string, data: string): void;
-	removeItem(key: string): void;
+export interface StorageLike {
+	clear(): PromiseLike<void> | void;
+	getItem(key: string): PromiseLike<string | null> | string | null;
+	setItem(key: string, data: string): PromiseLike<void> | void;
+	removeItem(key: string): PromiseLike<void> | void;
 }
 
 let createStorage: (dataDirectory?: string) => StorageLike;
@@ -104,11 +103,17 @@ if (typeof window !== 'undefined') {
 	}
 } else {
 	// Fallback to filesystem based storage if not in the browser.
-	// tslint:disable-next-line no-var-requires
-	const { LocalStorage } = require('node-localstorage');
-	createStorage = (dataDirectory: string) =>
-		// Set infinite quota
-		new LocalStorage(dataDirectory, Infinity);
+	const {
+		NodeStorage,
+		// tslint:disable-next-line no-var-requires
+	} = require('./node-storage') as typeof import('./node-storage');
+	const storageCache = Object.create(null);
+	createStorage = (dataDirectory: string) => {
+		if (!storageCache[dataDirectory]) {
+			storageCache[dataDirectory] = new NodeStorage(dataDirectory);
+		}
+		return storageCache[dataDirectory];
+	};
 }
 
-export = createStorage;
+export { createStorage };
