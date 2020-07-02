@@ -10,7 +10,7 @@
     "preserveConstEnums": true,
     "pretty": true,
     "sourceMap": true,
-    "strictNullChecks": true,
+    "strict": true,
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@resin.io"

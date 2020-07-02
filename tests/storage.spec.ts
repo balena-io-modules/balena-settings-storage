@@ -104,13 +104,14 @@ describe('Storage:', () => {
 		});
 
 		describe('given getItem throws an error', () => {
+			let getItemStub: any;
 			beforeEach(() => {
-				this.getItemStub = m.sinon.stub(localStorage, 'getItem');
-				this.getItemStub.throws(new Error('ENOENT'));
+				getItemStub = m.sinon.stub(localStorage, 'getItem');
+				getItemStub.throws(new Error('ENOENT'));
 			});
 
 			afterEach(() => {
-				this.getItemStub.restore();
+				getItemStub.restore();
 			});
 
 			it('should eventually be undefined', () =>
@@ -123,13 +124,14 @@ describe('Storage:', () => {
 				return;
 			}
 
+			let fooPath: string;
 			beforeEach(() => {
-				this.path = path.join(dataDirectory!, 'foo');
-				fs.writeFileSync(this.path, 'hello world');
+				fooPath = path.join(dataDirectory!, 'foo');
+				fs.writeFileSync(fooPath, 'hello world');
 			});
 
 			afterEach(() => {
-				fs.unlinkSync(this.path);
+				fs.unlinkSync(fooPath);
 			});
 
 			it('should be able to read back', () =>

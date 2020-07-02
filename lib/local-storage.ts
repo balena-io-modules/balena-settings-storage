@@ -108,7 +108,10 @@ if (typeof window !== 'undefined') {
 		// tslint:disable-next-line no-var-requires
 	} = require('./node-storage') as typeof import('./node-storage');
 	const storageCache = Object.create(null);
-	createStorage = (dataDirectory: string) => {
+	createStorage = (dataDirectory?: string) => {
+		if (dataDirectory == null) {
+			throw new Error('dataDirectory must be specified in nodejs');
+		}
 		if (!storageCache[dataDirectory]) {
 			storageCache[dataDirectory] = new NodeStorage(dataDirectory);
 		}
