@@ -54,9 +54,7 @@ Documentation
 
 **Example**  
 ```js
-const storage = require('balena-settings-storage')({
-	dataDirectory: '/opt/cache/balena'
-})
+const storage = require('balena-settings-storage')({	dataDirectory: '/opt/cache/balena'})
 ```
 
 * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
@@ -96,9 +94,7 @@ storage.set('token', '1234')
 
 **Example**  
 ```js
-storage.get('token').then((token) => {
-	console.log(token)
-});
+storage.get('token').then((token) => {	console.log(token)});
 ```
 <a name="module_storage.getStorage..has"></a>
 
@@ -114,12 +110,7 @@ storage.get('token').then((token) => {
 
 **Example**  
 ```js
-storage.has('token').then((hasToken) => {
-	if (hasToken) {
-		console.log('Yes')
-	} else {
-		console.log('No')
-});
+storage.has('token').then((hasToken) => {	if (hasToken) {		console.log('Yes')	} else {		console.log('No')});
 ```
 <a name="module_storage.getStorage..remove"></a>
 
