@@ -19,18 +19,22 @@ import * as path from 'path';
 import { StorageLike } from './local-storage';
 
 export class NodeStorage implements StorageLike {
-	private initialized = false;
+	private initialized: boolean | Promise<void> = false;
 	constructor(private dataDirectory: string) {}
 
-	public async init() {
-		if (this.initialized) {
+	private async init() {
+		if (this.initialized === true) {
 			return;
 		}
-		this.initialized = true;
+		if (this.initialized === false) {
+			this.initialized = fs.mkdir(this.dataDirectory);
+		}
 		try {
-			await fs.mkdir(this.dataDirectory);
+			await this.initialized;
 		} catch {
 			// ignore if it already exists
+		} finally {
+			this.initialized = true;
 		}
 	}
 
