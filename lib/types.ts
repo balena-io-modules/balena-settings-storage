@@ -5,8 +5,6 @@ For that matter we have to keep this definition in a separate module
 to make it consumable by the downstream TS projects.
 */
 
-import * as Promise from 'bluebird';
-
 export interface BalenaSettingsStorage {
 	set: (name: string, value: any) => Promise<void>;
 	get: (name: string) => Promise<string | number | object | undefined>;

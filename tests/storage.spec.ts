@@ -3,7 +3,7 @@ import * as FsModule from 'fs';
 import * as m from 'mochainon';
 import * as path from 'path';
 
-import getLocalStorage = require('../lib/local-storage');
+import { createStorage } from '../lib/local-storage';
 import getStorage = require('../lib/storage');
 
 const IS_BROWSER = typeof window !== 'undefined';
@@ -17,19 +17,15 @@ if (!IS_BROWSER) {
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 
-const localStorage = getLocalStorage(dataDirectory);
+const localStorage = createStorage(dataDirectory);
 const storage = getStorage({ dataDirectory });
 
 // tslint:disable no-unused-expression
 
 describe('Storage:', () => {
-	beforeEach(() => {
-		storage.clear();
-	});
+	beforeEach(() => storage.clear());
 
-	after(() => {
-		storage.clear();
-	});
+	after(() => storage.clear());
 
 	describe('given numbers', () => {
 		it('should be able to save a float number', () =>
@@ -108,13 +104,14 @@ describe('Storage:', () => {
 		});
 
 		describe('given getItem throws an error', () => {
+			let getItemStub: any;
 			beforeEach(() => {
-				this.getItemStub = m.sinon.stub(localStorage, 'getItem');
-				this.getItemStub.throws(new Error('ENOENT'));
+				getItemStub = m.sinon.stub(localStorage, 'getItem');
+				getItemStub.throws(new Error('ENOENT'));
 			});
 
 			afterEach(() => {
-				this.getItemStub.restore();
+				getItemStub.restore();
 			});
 
 			it('should eventually be undefined', () =>
@@ -127,13 +124,14 @@ describe('Storage:', () => {
 				return;
 			}
 
+			let fooPath: string;
 			beforeEach(() => {
-				this.path = path.join(dataDirectory!, 'foo');
-				fs.writeFileSync(this.path, 'hello world');
+				fooPath = path.join(dataDirectory!, 'foo');
+				fs.writeFileSync(fooPath, 'hello world');
 			});
 
 			afterEach(() => {
-				fs.unlinkSync(this.path);
+				fs.unlinkSync(fooPath);
 			});
 
 			it('should be able to read back', () =>

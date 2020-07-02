@@ -1,7 +1,7 @@
 import * as BalenaSettingsClientModule from 'balena-settings-client';
 import * as m from 'mochainon';
 
-import getLocalStorage = require('../lib/local-storage');
+import { createStorage } from '../lib/local-storage';
 
 const IS_BROWSER = typeof window !== 'undefined';
 
@@ -12,7 +12,7 @@ if (!IS_BROWSER) {
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 
-const localStorage = getLocalStorage(dataDirectory);
+const localStorage = createStorage(dataDirectory);
 
 describe('Local Storage:', () => {
 	it('should expose a function called getItem()', () =>

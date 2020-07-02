@@ -35,8 +35,8 @@ Documentation
 * [storage](#module_storage)
     * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
         * [~set(name, value)](#module_storage.getStorage..set) ⇒ <code>Promise</code>
-        * [~get(name)](#module_storage.getStorage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
-        * [~has(name)](#module_storage.getStorage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [~get(name)](#module_storage.getStorage..get) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;\*&gt;</code>
+        * [~has(name)](#module_storage.getStorage..has) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Boolean&gt;</code>
         * [~remove(name)](#module_storage.getStorage..remove) ⇒ <code>Promise</code>
         * [~clear()](#module_storage.getStorage..clear) ⇒ <code>Promise</code>
 
@@ -54,15 +54,13 @@ Documentation
 
 **Example**  
 ```js
-const storage = require('balena-settings-storage')({
-	dataDirectory: '/opt/cache/balena'
-})
+const storage = require('balena-settings-storage')({	dataDirectory: '/opt/cache/balena'})
 ```
 
 * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
     * [~set(name, value)](#module_storage.getStorage..set) ⇒ <code>Promise</code>
-    * [~get(name)](#module_storage.getStorage..get) ⇒ <code>Promise.&lt;\*&gt;</code>
-    * [~has(name)](#module_storage.getStorage..has) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [~get(name)](#module_storage.getStorage..get) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;\*&gt;</code>
+    * [~has(name)](#module_storage.getStorage..has) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Boolean&gt;</code>
     * [~remove(name)](#module_storage.getStorage..remove) ⇒ <code>Promise</code>
     * [~clear()](#module_storage.getStorage..clear) ⇒ <code>Promise</code>
 
@@ -84,10 +82,10 @@ storage.set('token', '1234')
 ```
 <a name="module_storage.getStorage..get"></a>
 
-#### getStorage~get(name) ⇒ <code>Promise.&lt;\*&gt;</code>
+#### getStorage~get(name) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;\*&gt;</code>
 **Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Get a value  
-**Returns**: <code>Promise.&lt;\*&gt;</code> - value or undefined  
+**Returns**: <code>[ &#x27;Promise&#x27; ].&lt;\*&gt;</code> - value or undefined  
 **Access**: public  
 
 | Param | Type | Description |
@@ -96,16 +94,14 @@ storage.set('token', '1234')
 
 **Example**  
 ```js
-storage.get('token').then((token) => {
-	console.log(token)
-});
+storage.get('token').then((token) => {	console.log(token)});
 ```
 <a name="module_storage.getStorage..has"></a>
 
-#### getStorage~has(name) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+#### getStorage~has(name) ⇒ <code>[ &#x27;Promise&#x27; ].&lt;Boolean&gt;</code>
 **Kind**: inner method of [<code>getStorage</code>](#module_storage.getStorage)  
 **Summary**: Check if the value exists  
-**Returns**: <code>Promise.&lt;Boolean&gt;</code> - has value  
+**Returns**: <code>[ &#x27;Promise&#x27; ].&lt;Boolean&gt;</code> - has value  
 **Access**: public  
 
 | Param | Type | Description |
@@ -114,12 +110,7 @@ storage.get('token').then((token) => {
 
 **Example**  
 ```js
-storage.has('token').then((hasToken) => {
-	if (hasToken) {
-		console.log('Yes')
-	} else {
-		console.log('No')
-});
+storage.has('token').then((hasToken) => {	if (hasToken) {		console.log('Yes')	} else {		console.log('No')});
 ```
 <a name="module_storage.getStorage..remove"></a>
 
