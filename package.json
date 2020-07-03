@@ -47,7 +47,8 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
-    "@types/node": "^10.17.26"
+    "@types/node": "^10.17.26",
+    "tslib": "^2.0.0"
   },
   "engines": {
     "node": ">=10.17.0"
