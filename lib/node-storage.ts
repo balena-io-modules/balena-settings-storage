@@ -64,7 +64,11 @@ export class NodeStorage implements StorageLike {
 	public async getItem(key: string) {
 		try {
 			return await fs.readFile(this.getPath(key), 'utf8');
-		} catch {
+		} catch (err) {
+			if (err.code === 'EACCES') {
+				throw err;
+			}
+
 			return null;
 		}
 	}
