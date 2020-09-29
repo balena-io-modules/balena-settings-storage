@@ -2,6 +2,7 @@ import * as BalenaSettingsClientModule from 'balena-settings-client';
 import * as FsModule from 'fs';
 import * as m from 'mochainon';
 import * as path from 'path';
+import { BalenaSettingsPermissionError } from 'balena-errors';
 
 import { createStorage } from '../lib/local-storage';
 import getStorage = require('../lib/storage');
@@ -124,18 +125,38 @@ describe('Storage:', () => {
 				return;
 			}
 
-			let fooPath: string;
-			beforeEach(() => {
-				fooPath = path.join(dataDirectory!, 'foo');
-				fs.writeFileSync(fooPath, 'hello world');
+			describe('with expected file access', () => {
+				let fooPath: string;
+				beforeEach(() => {
+					fooPath = path.join(dataDirectory!, 'foo');
+					fs.writeFileSync(fooPath, 'hello world');
+				});
+
+				afterEach(() => {
+					fs.unlinkSync(fooPath);
+				});
+
+				it('should be able to read back', () =>
+					m.chai.expect(storage.get('foo')).to.eventually.equal('hello world'));
 			});
 
-			afterEach(() => {
-				fs.unlinkSync(fooPath);
-			});
+			describe('with no read access', () => {
+				let fsReadFileStub: any;
+				beforeEach(() => {
+					fsReadFileStub = m.sinon.stub(fs.promises, 'readFile');
+					fsReadFileStub.rejects({ code: 'EACCES' });
+				});
 
-			it('should be able to read back', () =>
-				m.chai.expect(storage.get('foo')).to.eventually.equal('hello world'));
+				afterEach(() => {
+					fsReadFileStub.restore();
+				});
+
+				it('should raise an error', () => {
+					return m.chai
+						.expect(storage.get('bar'))
+						.to.eventually.be.rejectedWith(BalenaSettingsPermissionError);
+				});
+			});
 		});
 	});
 
