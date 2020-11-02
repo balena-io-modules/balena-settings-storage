@@ -2,7 +2,7 @@ import * as BalenaSettingsClientModule from 'balena-settings-client';
 import * as FsModule from 'fs';
 import * as m from 'mochainon';
 import * as path from 'path';
-import { BalenaSettingsPermissionError } from 'balena-errors';
+import { BalenaSettingsPermissionError } from '../lib/errors';
 
 import { createStorage } from '../lib/local-storage';
 import getStorage = require('../lib/storage');

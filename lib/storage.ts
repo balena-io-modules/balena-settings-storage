@@ -20,7 +20,7 @@ limitations under the License.
 
 import { createStorage } from './local-storage';
 import { BalenaSettingsStorage } from './types';
-import { BalenaSettingsPermissionError } from 'balena-errors';
+import { BalenaSettingsPermissionError } from './errors';
 
 /**
  * @summary Get an instance of storage module
