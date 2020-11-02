@@ -38,7 +38,7 @@
     "balena-config-karma": "^3.0.0",
     "balena-settings-client": "^4.0.0",
     "jsdoc-to-markdown": "^3.0.0",
-    "karma": "^3.1.4",
+    "karma": "^5.2.3",
     "mocha": "^3.5.0",
     "mochainon": "^2.0.0",
     "require-npm4-to-publish": "^1.0.0",
