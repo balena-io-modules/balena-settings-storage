@@ -20,6 +20,7 @@ limitations under the License.
 
 import { createStorage } from './local-storage';
 import { BalenaSettingsStorage } from './types';
+import { BalenaSettingsPermissionError } from 'balena-errors';
 
 /**
  * @summary Get an instance of storage module
@@ -96,7 +97,11 @@ const getStorage = ({
 			}
 
 			return result;
-		} catch {
+		} catch (err) {
+			if (err.code === 'EACCES') {
+				throw new BalenaSettingsPermissionError(err);
+			}
+
 			return undefined;
 		}
 	};
