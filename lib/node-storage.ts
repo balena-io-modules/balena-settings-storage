@@ -44,7 +44,9 @@ export class NodeStorage implements StorageLike {
 	public async clear() {
 		try {
 			await Promise.all(
-				(await fs.readdir(this.dataDirectory)).map(async (f) => {
+				(
+					await fs.readdir(this.dataDirectory)
+				).map(async (f) => {
 					f = path.join(this.dataDirectory, f);
 					try {
 						if ((await fs.stat(f)).isDirectory()) {
@@ -64,7 +66,7 @@ export class NodeStorage implements StorageLike {
 	public async getItem(key: string) {
 		try {
 			return await fs.readFile(this.getPath(key), 'utf8');
-		} catch (err) {
+		} catch (err: any) {
 			if (err.code === 'EACCES') {
 				throw err;
 			}

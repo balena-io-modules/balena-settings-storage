@@ -24,7 +24,6 @@
     "lint": "balena-lint --typescript lib tests",
     "test": "npm run build && npm run lint && npm run test:node && npm run test:browser",
     "build": "rimraf ./build && npm run prettify && tsc && npm run readme",
-    "prepublish": "require-npm4-to-publish",
     "prepack": "npm run build",
     "prettify": "balena-lint --typescript --fix lib tests",
     "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
@@ -33,18 +32,21 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@balena/lint": "^5.1.0",
-    "@resin.io/types-mochainon": "^2.0.1",
-    "@types/mocha": "^2.2.41",
-    "balena-config-karma": "^3.0.0",
+    "@types/chai": "^4.3.3",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^9.1.1",
+    "@types/sinon": "^10.0.11",
+    "balena-config-karma": "^4.0.0",
     "balena-settings-client": "^4.0.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
     "jsdoc-to-markdown": "^3.0.0",
-    "karma": "^3.1.4",
-    "mocha": "^3.5.0",
-    "mochainon": "^2.0.0",
-    "require-npm4-to-publish": "^1.0.0",
+    "karma": "^5.2.3",
+    "mocha": "^10.0.0",
     "rimraf": "^2.6.1",
-    "ts-node": "^3.3.0",
-    "typescript": "^3.9.6"
+    "sinon": "^13.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "@types/node": "^10.17.26",
