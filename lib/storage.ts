@@ -97,7 +97,7 @@ const getStorage = ({
 			}
 
 			return result;
-		} catch (err) {
+		} catch (err: any) {
 			if (err.code === 'EACCES') {
 				throw new BalenaSettingsPermissionError(err);
 			}
