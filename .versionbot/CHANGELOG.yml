@@ -1,0 +1,419 @@
+- commits:
+    - subject: Fix tests on node18
+      hash: 33262bd764f9e88cd566bf49939bb017ac7dd47b
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+        signed-off-by: Thodoris Greasidis <thodoris@balena.io>
+      author: Thodoris Greasidis
+    - subject: Replace balenaCI with flowzone
+      hash: 6679d186948bc592c3c846d926addd6903900978
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Andrea Rosci <andrear@balena.io>
+        signed-off-by: Andrea Rosci <andrear@balena.io>
+      author: JSReds
+  version: 7.0.1
+  title: ""
+  date: 2022-11-01T18:06:51.897Z
+- version: 7.0.0
+  date: 2020-11-04T00:12:17Z
+  commits:
+    - hash: 2f9399dc761e7ef1e6d59d0cac57a9b0940bc910
+      author: josecoelho
+      footers:
+        change-type: major
+      subject: Change to raise error when file has no permission
+      body: |-
+        Related to https://github.com/balena-io/balena-cli/issues/1667
+        This will allow permission errors to be captured and presented in a
+        meaningful way to the end user
+        We had a problem to run tests on CI while changing an actual file
+        to have to no read access, but the CI runs as root and can read
+        any file, to solve it we changed to stub fs.promises.readFile
+        raising EACCES instead
+    - hash: 6480a05dbef2e24e1822e0de6bb7c5670da71b0c
+      author: josecoelho
+      footers:
+        change-type: patch
+      subject: Remove package-lock.json because it is not recommended for libraries
+      body: |-
+        'package-lock.json' cannot be published to the npm registry, and will
+        be ignored when npm-installed by packages that depend on
+        resin-multibuild.
+        This can lead to dependency-related errors being masked when
+        resin-multibuild
+        is tested in isolation. Reference:
+        https://docs.npmjs.com/files/package-lock.json
+    - hash: c83037fe708d2911ce69c70ab00e551fc5296fd4
+      author: josecoelho
+      subject: Upgrade balena-erros to 4.7.1
+      body: null
+    - hash: 44a4c317a16e8cf4bab3650b2ec58f8ba7e5edc1
+      author: josecoelho
+      subject: Update balena-config-karma from 2.0.0 to 3.0.0
+      body: null
+- version: 6.0.1
+- date: 2020-07-03T20:22:21Z
+- commits:
+    - hash: 3aebc3fd23b5839bc8a88ae7f38b76859db2d5a9
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Add explicit tslib dependency
+- commits:
+    - body: null
+- version: 6.0.0
+- date: 2020-07-02T14:30:23Z
+- commits:
+    - hash: 2c8c5051df1344b9ea7fd543146662c3a895aaf7
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Switch to native promises and use asynchronous fs access on nodejs
+- commits:
+    - body: null
+- commits:
+    - hash: 27d1f5a3205ba827b4560e47651d234521e8845b
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Switch to generating es2015 output
+- commits:
+    - body: null
+- commits:
+    - hash: 666d672fc2b60baac8d9e0c51ec78a6d82d75e0a
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Drop support for nodejs < 10
+- commits:
+    - body: null
+- commits:
+    - hash: ac866ae8e81880b68b7902f2a467dd3783fbed35
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Update to @balena/lint 5.x
+- commits:
+    - body: null
+- commits:
+    - hash: 64a386fd6cbe0ed8f0f7122abf83503a34bda7de
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - subject: Fix potential race where `fs.mkdir` can be called multiple times
+- commits:
+    - body: null
+- commits:
+    - hash: d01b458423ef67e3f14e30cfc928108fb2cf3153
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Add engines property to package.json
+- commits:
+    - body: null
+- commits:
+    - hash: 38fa6363e90d61181dbb07f89acc73b398870bac
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Update typescript
+- commits:
+    - body: null
+- commits:
+    - hash: 3e2e311c531c730e588ebed1271c2ab9e3a3634c
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - subject: Enable strict type checking
+- commits:
+    - body: null
+- version: 5.0.2
+- date: 2020-05-04T11:14:25Z
+- commits:
+    - hash: 24e895fdfb381a50dbbd57547dd7987e1677e08f
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - subject: Stop committing build output
+- commits:
+    - body: null
+- commits:
+    - hash: ca8a0290f11683e4f00ed77f60c12b313518216c
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Switch to balena-lint
+- commits:
+    - body: null
+- commits:
+    - hash: 0dda5247f35ee72fd09aa9b309b934554af09509
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - subject: Rely on balenaCI for publishing
+- commits:
+    - body: null
+- commits:
+    - hash: 7202160ea526f94aed4a5a1ae2c43e854c5314e7
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - subject: Removed node 6 from CI in favour of 10/12
+- commits:
+    - body: null
+- version: 5.0.1
+- date: 2020-05-04T10:39:32Z
+- commits:
+    - hash: 121944d791c39a133e469768b6762a3dc5ed9ceb
+- commits:
+    - author: Pagan Gazzard
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Use type declarations for exported types
+- commits:
+    - body: null
+- version: 5.0.0
+- date: 2018-10-17T15:49:45Z
+- commits:
+    - hash: 7a835906dc6fcf67a34667fb24312e734d233695
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        change-type: major
+- commits:
+    - footers:
+        signed-off-by: Tim Perry <tim@resin.io>
+- commits:
+    - subject: Rename everything 'resin' to 'balena'
+- commits:
+    - body: null
+- commits:
+    - hash: bd081589773026ad88aced74a5130999140e9246
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        signed-off-by: Tim Perry <tim@resin.io>
+- commits:
+    - subject: Upgrade typescript to 3.1.3
+- commits:
+    - body: null
+- commits:
+    - hash: 2b5297863193d53aa9ba7f5e8483cf6be8f6f66f
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        signed-off-by: Tim Perry <tim@balena.io>
+- commits:
+    - subject: Fix circle's npm install
+- commits:
+    - body: |-
+        Reinstalling a specific different version seems to break things in
+        bizarre and unpredictable ways.
+- commits:
+    - hash: b65c6afcce12fb7dced0525cb5149553962ce94c
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Switch to the new balena-config-karma
+- commits:
+    - body: null
+- commits:
+    - hash: 5cef2e895d3054107f9ab32c1e620647b62d7a68
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Pin the appveyor test version
+- commits:
+    - body: null
+- version: 4.0.3
+- date: 2017-12-13T12:41:16Z
+- commits:
+    - hash: 9eb046f0d287b75fc2d8b7581cac360f3a78b8c1
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Make sure we have the correct version of npm in circle to publish
+- commits:
+    - body: null
+- version: 4.0.2
+- date: 2017-11-22T17:48:53Z
+- commits:
+    - hash: 7638ccb420d99b0ce599beb2b529d054853fc50d
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Set up circleci npm autopublishing
+- commits:
+    - body: null
+- commits:
+    - hash: a1cfbc08645b69abce779dccbde511255556e2f4
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Use docker images including browsers, to fix the tests in circle
+- commits:
+    - body: null
+- version: 4.0.1
+- date: 2017-11-02T13:39:35Z
+- commits:
+    - hash: 778e120f904d677c00270eb0dfd72aeaecc65619
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Reformat changelog to add versionbot
+- commits:
+    - body: null
+- commits:
+    - hash: 874d5da4ff5fadd028536a248712fc263a96ac21
+- commits:
+    - author: Tim Perry
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Upgrade resin-settings-client to fix typings issue
+- commits:
+    - body: null
+- version: 4.0.0
+- date: 2017-08-31T13:51:45Z
+- commits:
+    - hash: c2a4510468c739fb049152b1bb4d00fc01f791b3
+- commits:
+    - author: Eugene Mirotin
+- commits:
+    - subject: Convert to Typescript
+- commits:
+    - body: Drops support for Node < 6
+- version: 3.0.1
+- date: 2017-04-25T09:23:40Z
+- commits:
+    - hash: 96bafa7a72d56c65b23948fd08a2648ce4d297f5
+- commits:
+    - author: Lucian Buzzo
+- commits:
+    - footers:
+        change-type: patch
+- commits:
+    - subject: Fall back to an in-memory replacement for localStorage if it is not
+        avaialable
+- commits:
+    - body: "Connects to #17"
+- version: 3.0.0
+- date: 2017-03-24T11:52:24Z
+- commits:
+    - hash: 4c56ec4a5ea1328dff3d2475b8b7ac0cdb1c7b5a
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Prefix keys in browser storage with 'resin-'
+- commits:
+    - body: null
+- commits:
+    - hash: 6bc467e6927f1fc73862147ef561a728a955a441
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Add coffeescript header to hide diffs on github
+- commits:
+    - body: null
+- commits:
+    - hash: 373c5624386007c367fa747039f485bac695bd76
+- commits:
+    - author: Tim Perry
+- commits:
+    - subject: Drop 0.12 from automated builds
+- commits:
+    - body: null
+- version: 2.0.0
+- date: 2016-10-09T20:18:40Z
+- commits:
+    - hash: 2663568511b1310947827278e687310a3725f294
+- commits:
+    - author: Eugene Mirotin
+- commits:
+    - subject: Prepare for SDK browser
+- commits:
+    - body: |-
+        detach from resin-settings-client
+        update dependencies
+        use lodash granular import
+        standardize package.json
+- commits:
+    - hash: a667faa69fbe4ab2cd351ddbfcee48849621bf48
+- commits:
+    - author: Juan Cruz Viotti
+- commits:
+    - footers:
+        signed-off-by: Juan Cruz Viotti <jviotti@openmailbox.org>
+- commits:
+    - subject: Move to resin-io-modules organisation
+- commits:
+    - body: null
+- commits:
+    - hash: 10312913a227faef815bfab0a43b7bb876df941b
+- commits:
+    - author: Juan Cruz Viotti
+- commits:
+    - footers:
+        signed-off-by: Juan Cruz Viotti <jviotti@openmailbox.org>
+- commits:
+    - subject: Rebuild CoffeeScript
+- commits:
+    - body: |-
+        Pending changes from:
+        - https://github.com/resin-io/resin-settings-storage/pull/12
+- commits:
+    - hash: bbb97a32efdd5445c2b4ab2f118afbfebf25a996
+- commits:
+    - author: Eugene Mirotin
+- commits:
+    - subject: add browser tests
+- commits:
+    - body: null
