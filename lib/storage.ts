@@ -33,11 +33,16 @@ import { BalenaSettingsPermissionError } from 'balena-errors';
  *
  * @return {storage}
  * @example
- * const storage = require('balena-settings-storage')({
+ * // with es6 imports
+ * import { getStorage } from 'balena-settings-storage';
+ * // or with node require
+ * const { getStorage } = require('balena-settings-storage');
+ *
+ * const storage = getStorage({
  * 	dataDirectory: '/opt/cache/balena'
- * })
+ * });
  */
-const getStorage = ({
+export const getStorage = ({
 	dataDirectory,
 }: { dataDirectory?: string } = {}): BalenaSettingsStorage => {
 	const localStorage = createStorage(dataDirectory);
@@ -157,5 +162,3 @@ const getStorage = ({
 
 	return { set, get, has, remove, clear };
 };
-
-export = getStorage;

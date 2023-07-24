@@ -9,7 +9,7 @@ import { BalenaSettingsPermissionError } from 'balena-errors';
 chai.use(chaiAsPromised);
 
 import { createStorage } from '../lib/local-storage';
-import getStorage = require('../lib/storage');
+import { getStorage } from '../lib/storage';
 
 const IS_BROWSER = typeof window !== 'undefined';
 

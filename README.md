@@ -54,9 +54,14 @@ Documentation
 
 **Example**  
 ```js
-const storage = require('balena-settings-storage')({
+// with es6 imports
+import { getStorage } from 'balena-settings-storage';
+// or with node require
+const { getStorage } = require('balena-settings-storage');
+
+const storage = getStorage({
 	dataDirectory: '/opt/cache/balena'
-})
+});
 ```
 
 * [.getStorage(options)](#module_storage.getStorage) ⇒ <code>storage</code>
