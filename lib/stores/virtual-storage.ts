@@ -1,7 +1,7 @@
 import type { StorageFactory } from '../types';
 
 export const createStore: StorageFactory = () => {
-	let _store: { [key: string]: string } = {};
+	let _store: { [key: string]: string } = Object.create(null);
 
 	return {
 		getItem(key: string) {
