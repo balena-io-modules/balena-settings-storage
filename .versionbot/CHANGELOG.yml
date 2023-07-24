@@ -1,4 +1,43 @@
 - commits:
+    - subject: "virtual-storage: Use an object without a prototype as the store"
+      hash: 00400db327771795a8b14fe89c0bf0c6deb7259a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+    - subject: Specify a browser entry point
+      hash: c6ea47565cb355adad15a310b9993a0022951b39
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+    - subject: Use es6 exports
+      hash: 080f73f04bf290813f780e85ca017420cf7463db
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Thodoris Greasidis
+    - subject: Update TypeScript to 5.1.6
+      hash: a782ec12bcf3bf821e9c808b5cdd9ec9d6edd823
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+    - subject: Drop support for nodejs < 14
+      hash: bc1cf351bc4d6b3a950148d6157e196a7c56051c
+      body: ""
+      footer:
+        Change-type: major
+        change-type: major
+      author: Thodoris Greasidis
+  version: 8.0.0
+  title: ""
+  date: 2023-07-24T14:22:05.302Z
+- commits:
     - subject: Update balena-errors from v4.7.1 to v4.7.3
       hash: 877c1d027f02854670ffaa7758ff70d408492250
       body: ""
