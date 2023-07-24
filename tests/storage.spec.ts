@@ -2,23 +2,23 @@ import * as chai from 'chai';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import * as chaiAsPromised from 'chai-as-promised';
-import * as BalenaSettingsClientModule from 'balena-settings-client';
-import * as FsModule from 'fs';
-import * as path from 'path';
 import { BalenaSettingsPermissionError } from 'balena-errors';
 chai.use(chaiAsPromised);
 
-import { createStorage } from '../lib/local-storage';
-import getStorage = require('../lib/storage');
+import { createStorage } from '../lib/stores/local-storage';
+import { getStorage } from '..';
 
 const IS_BROWSER = typeof window !== 'undefined';
 
 let dataDirectory: string | undefined;
-let fs: typeof FsModule;
+let fs: typeof import('fs');
+let path: typeof import('path');
 if (!IS_BROWSER) {
 	// tslint:disable no-var-requires
 	fs = require('fs');
-	const settings: typeof BalenaSettingsClientModule = require('balena-settings-client');
+	path = require('path');
+	const settings =
+		require('balena-settings-client') as typeof import('balena-settings-client');
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 

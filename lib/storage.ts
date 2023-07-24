@@ -18,8 +18,7 @@ limitations under the License.
  * @module storage
  */
 
-import { createStorage } from './local-storage';
-import { BalenaSettingsStorage } from './types';
+import { BalenaSettingsStorage, StorageLike } from './types';
 import { BalenaSettingsPermissionError } from 'balena-errors';
 
 /**
@@ -33,15 +32,16 @@ import { BalenaSettingsPermissionError } from 'balena-errors';
  *
  * @return {storage}
  * @example
- * const storage = require('balena-settings-storage')({
+ * // with es6 imports
+ * import { getStorage } from 'balena-settings-storage';
+ * // or with node require
+ * const { getStorage } = require('balena-settings-storage');
+ *
+ * const storage = getStorage({
  * 	dataDirectory: '/opt/cache/balena'
- * })
+ * });
  */
-const getStorage = ({
-	dataDirectory,
-}: { dataDirectory?: string } = {}): BalenaSettingsStorage => {
-	const localStorage = createStorage(dataDirectory);
-
+export const getStorage = (store: StorageLike): BalenaSettingsStorage => {
 	/**
 	 * @summary Set a value
 	 * @function
@@ -59,7 +59,7 @@ const getStorage = ({
 		if (typeof value !== 'string') {
 			value = JSON.stringify(value);
 		}
-		return localStorage.setItem(name, value);
+		return store.setItem(name, value);
 	};
 
 	/**
@@ -80,7 +80,7 @@ const getStorage = ({
 		name: string,
 	): Promise<string | number | object | undefined> => {
 		try {
-			const result = await localStorage.getItem(name);
+			const result = await store.getItem(name);
 
 			if (result == null) {
 				return undefined;
@@ -140,7 +140,7 @@ const getStorage = ({
 	 * @example
 	 * storage.remove('token')
 	 */
-	const remove = async (name: string) => localStorage.removeItem(name);
+	const remove = async (name: string) => store.removeItem(name);
 
 	/**
 	 * @summary Remove all values
@@ -153,9 +153,7 @@ const getStorage = ({
 	 * @example
 	 * storage.clear()
 	 */
-	const clear = async () => localStorage.clear();
+	const clear = async () => store.clear();
 
 	return { set, get, has, remove, clear };
 };
-
-export = getStorage;

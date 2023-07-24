@@ -16,7 +16,7 @@ limitations under the License.
 
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { StorageLike } from './local-storage';
+import type { StorageFactory, StorageLike } from '../types';
 
 export class NodeStorage implements StorageLike {
 	private initialized: boolean | Promise<void> = false;
@@ -86,3 +86,15 @@ export class NodeStorage implements StorageLike {
 		}
 	}
 }
+
+const storageCache = Object.create(null);
+
+export const createStorage: StorageFactory = (dataDirectory?: string) => {
+	if (dataDirectory == null) {
+		throw new Error('dataDirectory must be specified in nodejs');
+	}
+	if (!storageCache[dataDirectory]) {
+		storageCache[dataDirectory] = new NodeStorage(dataDirectory);
+	}
+	return storageCache[dataDirectory];
+};
