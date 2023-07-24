@@ -1,14 +1,14 @@
 import { expect } from 'chai';
-import * as BalenaSettingsClientModule from 'balena-settings-client';
 
-import { createStorage } from '../lib/local-storage';
+import { createStorage } from '../lib/stores/local-storage';
 
 const IS_BROWSER = typeof window !== 'undefined';
 
 let dataDirectory: string | undefined;
 if (!IS_BROWSER) {
-	// tslint:disable-next-line no-var-requires
-	const settings: typeof BalenaSettingsClientModule = require('balena-settings-client');
+	const settings =
+		// tslint:disable-next-line no-var-requires
+		require('balena-settings-client') as typeof import('balena-settings-client');
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 

@@ -2,8 +2,11 @@
   "name": "balena-settings-storage",
   "version": "7.0.2",
   "description": "Balena settings storage utilities",
-  "main": "build/storage.js",
-  "types": "build/storage.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "browser": {
+    "build/index.js": "./build/index.browser.js"
+  },
   "homepage": "https://github.com/balena-io-modules/balena-settings-storage",
   "repository": {
     "type": "git",
@@ -26,7 +29,7 @@
     "build": "rimraf ./build && npm run prettify && tsc && npm run readme",
     "prepack": "npm run build",
     "prettify": "balena-lint --typescript --fix lib tests",
-    "readme": "jsdoc2md --template doc/README.hbs build/storage.js > README.md"
+    "readme": "jsdoc2md --template doc/README.hbs build/index.js build/storage.js > README.md"
   },
   "author": "Juan Cruz Viotti <juan@balena.io>",
   "license": "Apache-2.0",

@@ -1,10 +1,3 @@
-/* TODO:
-because we're using `export =` style exports (for the sake of backward-compatibility)
-the main module cannot export anything else.
-For that matter we have to keep this definition in a separate module
-to make it consumable by the downstream TS projects.
-*/
-
 export interface BalenaSettingsStorage {
 	set: (name: string, value: any) => Promise<void>;
 	get: (name: string) => Promise<string | number | object | undefined>;
@@ -12,3 +5,12 @@ export interface BalenaSettingsStorage {
 	remove: (name: string) => Promise<void>;
 	clear: () => Promise<void>;
 }
+
+export interface StorageLike {
+	clear(): PromiseLike<void> | void;
+	getItem(key: string): PromiseLike<string | null> | string | null;
+	setItem(key: string, data: string): PromiseLike<void> | void;
+	removeItem(key: string): PromiseLike<void> | void;
+}
+
+export type StorageFactory = (dataDirectory?: string) => StorageLike;

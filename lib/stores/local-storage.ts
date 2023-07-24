@@ -14,30 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import type { StorageFactory } from '../types';
+
 const prefixed = (key: string) => `balena-${key}`;
-
-const createVirtualStore = () => {
-	let _store: { [key: string]: string } = {};
-
-	return {
-		getItem(key: string) {
-			if (_store.hasOwnProperty(key)) {
-				return _store[key];
-			} else {
-				return null;
-			}
-		},
-		setItem(key: string, value: string) {
-			_store[key] = value;
-		},
-		removeItem(key: string) {
-			delete _store[key];
-		},
-		clear() {
-			_store = {};
-		},
-	};
-};
 
 type StorageType = 'localStorage' | 'sessionStorage';
 
@@ -73,50 +52,20 @@ const isStorageSupported = ($window: Window, storageType: StorageType) => {
 	return supported;
 };
 
-export interface StorageLike {
-	clear(): PromiseLike<void> | void;
-	getItem(key: string): PromiseLike<string | null> | string | null;
-	setItem(key: string, data: string): PromiseLike<void> | void;
-	removeItem(key: string): PromiseLike<void> | void;
-}
+export const isSupported = () =>
+	typeof window !== 'undefined' && isStorageSupported(window, 'localStorage');
 
-let createStorage: (dataDirectory?: string) => StorageLike;
-
-if (typeof window !== 'undefined') {
-	if (isStorageSupported(window, 'localStorage')) {
-		createStorage = () => ({
-			getItem(key: string) {
-				return localStorage.getItem(prefixed(key));
-			},
-			setItem(key: string, value: string) {
-				return localStorage.setItem(prefixed(key), value);
-			},
-			removeItem(key: string) {
-				return localStorage.removeItem(prefixed(key));
-			},
-			clear() {
-				return localStorage.clear();
-			},
-		});
-	} else {
-		createStorage = createVirtualStore;
-	}
-} else {
-	// Fallback to filesystem based storage if not in the browser.
-	const {
-		NodeStorage,
-		// tslint:disable-next-line no-var-requires
-	} = require('./node-storage') as typeof import('./node-storage');
-	const storageCache = Object.create(null);
-	createStorage = (dataDirectory?: string) => {
-		if (dataDirectory == null) {
-			throw new Error('dataDirectory must be specified in nodejs');
-		}
-		if (!storageCache[dataDirectory]) {
-			storageCache[dataDirectory] = new NodeStorage(dataDirectory);
-		}
-		return storageCache[dataDirectory];
-	};
-}
-
-export { createStorage };
+export const createStorage: StorageFactory = () => ({
+	getItem(key: string) {
+		return localStorage.getItem(prefixed(key));
+	},
+	setItem(key: string, value: string) {
+		return localStorage.setItem(prefixed(key), value);
+	},
+	removeItem(key: string) {
+		return localStorage.removeItem(prefixed(key));
+	},
+	clear() {
+		return localStorage.clear();
+	},
+});
