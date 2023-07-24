@@ -54,7 +54,7 @@
     "tslib": "^2.0.0"
   },
   "engines": {
-    "node": ">=10.17.0"
+    "node": ">=14.0"
   },
   "versionist": {
     "publishedAt": "2022-11-08T13:14:38.631Z"
