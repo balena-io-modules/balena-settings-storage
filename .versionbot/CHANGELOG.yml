@@ -1,4 +1,15 @@
 - commits:
+    - subject: Fix the localStorage support check
+      hash: 190fe6ba20cb71703cc9de4376b3ba5f1618f09a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+  version: 8.0.1
+  title: ""
+  date: 2023-07-26T15:59:04.393Z
+- commits:
     - subject: "virtual-storage: Use an object without a prototype as the store"
       hash: 00400db327771795a8b14fe89c0bf0c6deb7259a
       body: ""
