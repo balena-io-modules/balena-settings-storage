@@ -50,7 +50,7 @@ Documentation
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>Object</code> | options |
-| options.dataDirectory | <code>string</code> | the directory to use for storage in Node.js. Ignored in the browser. |
+| [options.dataDirectory] | <code>String</code> \| <code>False</code> | the directory to use for storage in Node.js or false to create an isolated in memory instance. Values other than false are ignored in the browser. |
 
 **Example**  
 ```js
