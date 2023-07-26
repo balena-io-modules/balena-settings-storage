@@ -12,7 +12,7 @@ export const getStorage = (options: {
 		// use dynamic imports so that node apps have less files to read on startup.
 		const localStore =
 			require('./stores/local-storage') as typeof import('./stores/local-storage');
-		store = localStorage.isSupported()
+		store = localStore.isSupported()
 			? localStore.createStorage(options?.dataDirectory)
 			: (
 					require('./stores/virtual-storage') as typeof import('./stores/virtual-storage')
