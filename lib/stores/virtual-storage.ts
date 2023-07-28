@@ -5,7 +5,7 @@ export const createStore: StorageFactory = () => {
 
 	return {
 		getItem(key: string) {
-			if (_store.hasOwnProperty(key)) {
+			if (Object.prototype.hasOwnProperty.call(_store, key)) {
 				return _store[key];
 			} else {
 				return null;
