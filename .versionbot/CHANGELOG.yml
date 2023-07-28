@@ -1,4 +1,15 @@
 - commits:
+    - subject: "Support using memory storage by passing dataDirectory: false"
+      hash: c6c29b01d76bbcaf8b9917ec2437cba30169ef95
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Thodoris Greasidis
+  version: 8.1.0
+  title: ""
+  date: 2023-07-28T14:30:02.457Z
+- commits:
     - subject: "virtual-storage: Fix own property check"
       hash: 285e9cf751dff296392c0bc2fd2de9e445efd79a
       body: ""

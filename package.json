@@ -1,6 +1,6 @@
 {
   "name": "balena-settings-storage",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "description": "Balena settings storage utilities",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -60,6 +60,6 @@
     "node": ">=14.0"
   },
   "versionist": {
-    "publishedAt": "2023-07-28T14:10:43.457Z"
+    "publishedAt": "2023-07-28T14:30:02.664Z"
   }
 }
