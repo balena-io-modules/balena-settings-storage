@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+import { BalenaSettingsStorage, StorageLike } from './types';
+import { BalenaSettingsPermissionError } from 'balena-errors';
+
 /**
  * @module storage
  */
-
-import { BalenaSettingsStorage, StorageLike } from './types';
-import { BalenaSettingsPermissionError } from 'balena-errors';
 
 /**
  * @summary Get an instance of storage module
@@ -27,8 +27,8 @@ import { BalenaSettingsPermissionError } from 'balena-errors';
  * @static
  * @public
  *
- * @param {Object?} options - options
- * @param {string?} options.dataDirectory - the directory to use for storage in Node.js. Ignored in the browser.
+ * @param {Object} options - options
+ * @param {String|False} [options.dataDirectory] - the directory to use for storage in Node.js or false to create an isolated in memory instance. Values other than false are ignored in the browser.
  *
  * @return {storage}
  * @example

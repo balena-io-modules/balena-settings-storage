@@ -1,3 +1,7 @@
+export interface BalenaSettingsStorageOptions {
+	dataDirectory?: string | false;
+}
+
 export interface BalenaSettingsStorage {
 	set: (name: string, value: any) => Promise<void>;
 	get: (name: string) => Promise<string | number | object | undefined>;
