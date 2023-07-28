@@ -1,4 +1,15 @@
 - commits:
+    - subject: "virtual-storage: Fix own property check"
+      hash: 285e9cf751dff296392c0bc2fd2de9e445efd79a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Thodoris Greasidis
+  version: 8.0.2
+  title: ""
+  date: 2023-07-28T14:10:43.310Z
+- commits:
     - subject: Fix the localStorage support check
       hash: 190fe6ba20cb71703cc9de4376b3ba5f1618f09a
       body: ""
