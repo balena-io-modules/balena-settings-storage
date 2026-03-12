@@ -1,4 +1,31 @@
 - commits:
+    - subject: Update jsdoc-to-markdown to 9.x
+      hash: dcdd0453912e0593b9d6831cbd9d4e887c3b28eb
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+    - subject: Update @balena/lint to 9.x
+      hash: d545cc7c93552a15c2b0f901370d59fc0ece2a0a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+    - subject: "Add id-token: write permission for NPM OIDC publishing"
+      hash: d21373321d996de37171b4e49f30afd1032afeba
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 8.1.1
+  title: ""
+  date: 2026-03-12T20:52:36.676Z
+- commits:
     - subject: "Support using memory storage by passing dataDirectory: false"
       hash: c6c29b01d76bbcaf8b9917ec2437cba30169ef95
       body: ""
