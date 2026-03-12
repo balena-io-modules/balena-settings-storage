@@ -24,17 +24,17 @@
   "scripts": {
     "test:node": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts",
     "test:browser": "karma start",
-    "lint": "balena-lint --typescript lib tests",
+    "lint": "balena-lint -t tsconfig.dev.json lib tests",
+    "lint-fix": "balena-lint --fix -t tsconfig.dev.json lib tests",
     "test": "npm run build && npm run lint && npm run test:node && npm run test:browser",
-    "build": "rimraf ./build && npm run prettify && tsc && npm run readme",
+    "build": "rimraf ./build && npm run lint-fix && tsc && npm run readme",
     "prepack": "npm run build",
-    "prettify": "balena-lint --typescript --fix lib tests",
     "readme": "jsdoc2md --template doc/README.hbs build/index.js build/storage.js > README.md"
   },
   "author": "Juan Cruz Viotti <juan@balena.io>",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@balena/lint": "^5.1.0",
+    "@balena/lint": "^9.3.13",
     "@types/chai": "^4.3.3",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.1.1",
@@ -49,10 +49,10 @@
     "rimraf": "^2.6.1",
     "sinon": "^13.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@types/node": "^10.17.26",
+    "@types/node": "^14.18.63",
     "balena-errors": "^4.7.3",
     "tslib": "^2.0.0"
   },

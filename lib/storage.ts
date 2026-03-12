@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { BalenaSettingsStorage, StorageLike } from './types';
+import type { BalenaSettingsStorage, StorageLike } from './types';
 import { BalenaSettingsPermissionError } from 'balena-errors';
 
 /**
@@ -92,7 +92,7 @@ export const getStorage = (store: StorageLike): BalenaSettingsStorage => {
 
 			try {
 				return JSON.parse(result);
-			} catch (error) {
+			} catch {
 				// do nothing
 			}
 

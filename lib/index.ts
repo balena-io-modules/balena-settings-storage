@@ -13,10 +13,13 @@ export type {
 // use dynamic imports so that node apps have less files to read on startup.
 const lazyImport = {
 	virtual: () =>
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require('./stores/virtual-storage') as typeof import('./stores/virtual-storage'),
 	local: () =>
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require('./stores/local-storage') as typeof import('./stores/local-storage'),
 	node: () =>
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require('./stores/node-storage') as typeof import('./stores/node-storage'),
 };
 

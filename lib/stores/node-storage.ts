@@ -44,9 +44,7 @@ export class NodeStorage implements StorageLike {
 	public async clear() {
 		try {
 			await Promise.all(
-				(
-					await fs.readdir(this.dataDirectory)
-				).map(async (f) => {
+				(await fs.readdir(this.dataDirectory)).map(async (f) => {
 					f = path.join(this.dataDirectory, f);
 					try {
 						if ((await fs.stat(f)).isDirectory()) {
@@ -81,7 +79,7 @@ export class NodeStorage implements StorageLike {
 	public async removeItem(key: string) {
 		try {
 			await fs.unlink(this.getPath(key));
-		} catch (e) {
+		} catch {
 			// ignore
 		}
 	}
@@ -93,8 +91,5 @@ export const createStorage: StorageFactory = (dataDirectory?: string) => {
 	if (dataDirectory == null) {
 		throw new Error('dataDirectory must be specified in nodejs');
 	}
-	if (!storageCache[dataDirectory]) {
-		storageCache[dataDirectory] = new NodeStorage(dataDirectory);
-	}
-	return storageCache[dataDirectory];
+	return (storageCache[dataDirectory] ??= new NodeStorage(dataDirectory));
 };
