@@ -14,18 +14,18 @@ let dataDirectory: string | undefined;
 let fs: typeof import('fs');
 let path: typeof import('path');
 if (!IS_BROWSER) {
-	// tslint:disable no-var-requires
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	fs = require('fs');
+	// eslint-disable-next-line @typescript-eslint/no-require-imports
 	path = require('path');
 	const settings =
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require('balena-settings-client') as typeof import('balena-settings-client');
 	dataDirectory = settings.get<string>('dataDirectory');
 }
 
 const localStorage = createStorage(dataDirectory);
 const storage = getStorage({ dataDirectory });
-
-// tslint:disable no-unused-expression
 
 describe('Storage:', () => {
 	beforeEach(() => storage.clear());
@@ -176,8 +176,8 @@ describe('Storage:', () => {
 
 	describe('.remove()', () => {
 		describe('given a key does not exist', () => {
-			it('should do nothing', () => {
-				expect(storage.has('foobar')).to.eventually.equal(false);
+			it('should do nothing', async () => {
+				await expect(storage.has('foobar')).to.eventually.equal(false);
 				return storage
 					.remove('foobar')
 					.then(() => expect(storage.has('foobar')).to.eventually.equal(false));

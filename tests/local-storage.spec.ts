@@ -7,7 +7,7 @@ const IS_BROWSER = typeof window !== 'undefined';
 let dataDirectory: string | undefined;
 if (!IS_BROWSER) {
 	const settings =
-		// tslint:disable-next-line no-var-requires
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require('balena-settings-client') as typeof import('balena-settings-client');
 	dataDirectory = settings.get<string>('dataDirectory');
 }

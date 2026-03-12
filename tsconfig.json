@@ -11,13 +11,10 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/@resin.io"
-    ],
+    "skipLibCheck": true,
     "declaration": true
   },
   "include": [
-    "lib/**/*.ts"
+    "lib/**/*"
   ]
 }

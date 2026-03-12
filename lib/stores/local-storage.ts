@@ -32,7 +32,7 @@ const isStorageSupported = ($window: Window, storageType: StorageType) => {
 
 	try {
 		storage = $window[storageType];
-	} catch (err) {
+	} catch {
 		return false;
 	}
 
@@ -45,7 +45,7 @@ const isStorageSupported = ($window: Window, storageType: StorageType) => {
 		storage.setItem(key, key);
 		supported = storage.getItem(key) === key;
 		storage.removeItem(key);
-	} catch (err) {
+	} catch {
 		return false;
 	}
 
@@ -60,12 +60,12 @@ export const createStorage: StorageFactory = () => ({
 		return localStorage.getItem(prefixed(key));
 	},
 	setItem(key: string, value: string) {
-		return localStorage.setItem(prefixed(key), value);
+		localStorage.setItem(prefixed(key), value);
 	},
 	removeItem(key: string) {
-		return localStorage.removeItem(prefixed(key));
+		localStorage.removeItem(prefixed(key));
 	},
 	clear() {
-		return localStorage.clear();
+		localStorage.clear();
 	},
 });
