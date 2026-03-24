@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import * as chaiAsPromised from 'chai-as-promised';
-import { BalenaSettingsPermissionError } from 'balena-errors';
+import { BalenaSettingsPermissionError } from '..';
 chai.use(chaiAsPromised);
 
 import { createStorage } from '../lib/stores/local-storage';
