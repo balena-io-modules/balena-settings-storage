@@ -1,3 +1,4 @@
+export { BalenaSettingsPermissionError } from './storage';
 import { getStorage as $getStorage } from './storage';
 import type {
 	BalenaSettingsStorage,

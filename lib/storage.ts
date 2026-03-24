@@ -15,7 +15,9 @@ limitations under the License.
 */
 
 import type { BalenaSettingsStorage, StorageLike } from './types';
+// TODO-MAJOR: Remove balena-errors import altogether and create the relevant errors in this module instead.
 import { BalenaSettingsPermissionError } from 'balena-errors';
+export { BalenaSettingsPermissionError };
 
 /**
  * @module storage
