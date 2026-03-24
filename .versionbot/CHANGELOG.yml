@@ -1,4 +1,15 @@
 - commits:
+    - subject: Export error types for users to be able to use `instanceof` with
+      hash: 88a0de48cd1c7d24e4dee443e8c2f756b1083b82
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Pagan Gazzard
+  version: 8.2.0
+  title: ""
+  date: 2026-03-24T18:12:32.564Z
+- commits:
     - subject: Update jsdoc-to-markdown to 9.x
       hash: dcdd0453912e0593b9d6831cbd9d4e887c3b28eb
       body: ""
