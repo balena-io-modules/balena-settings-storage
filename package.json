@@ -52,12 +52,12 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@types/node": "^14.18.63",
+    "@types/node": "^18.0.0",
     "balena-errors": "^4.7.3",
     "tslib": "^2.0.0"
   },
   "engines": {
-    "node": ">=14.0"
+     "node": ">=18.0.0"
   },
   "versionist": {
     "publishedAt": "2026-03-24T18:12:32.665Z"
