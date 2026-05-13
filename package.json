@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@types/node": "^18.0.0",
-    "balena-errors": "^4.7.3",
+    "balena-errors": "^5.0.0",
     "tslib": "^2.0.0"
   },
   "engines": {
