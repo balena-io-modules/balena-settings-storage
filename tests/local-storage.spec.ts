@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { createStorage } from '../lib/stores/local-storage';
+import { createStorage } from '../src/stores/local-storage';
 
 const IS_BROWSER = typeof window !== 'undefined';
 

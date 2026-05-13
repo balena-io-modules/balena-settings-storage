@@ -24,8 +24,8 @@
   "scripts": {
     "test:node": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts",
     "test:browser": "karma start",
-    "lint": "balena-lint -t tsconfig.dev.json lib tests",
-    "lint-fix": "balena-lint --fix -t tsconfig.dev.json lib tests",
+    "lint": "balena-lint -t tsconfig.dev.json src tests",
+    "lint-fix": "balena-lint --fix -t tsconfig.dev.json src tests",
     "test": "npm run build && npm run lint && npm run test:node && npm run test:browser",
     "build": "rimraf ./build && npm run lint-fix && tsc && npm run readme",
     "prepack": "npm run build",
