@@ -5,7 +5,7 @@ import * as chaiAsPromised from 'chai-as-promised';
 import { BalenaSettingsPermissionError } from '..';
 chai.use(chaiAsPromised);
 
-import { createStorage } from '../lib/stores/local-storage';
+import { createStorage } from '../src/stores/local-storage';
 import { getStorage } from '..';
 
 const IS_BROWSER = typeof window !== 'undefined';
