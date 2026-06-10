@@ -31,7 +31,7 @@
     "prepack": "npm run build",
     "readme": "jsdoc2md --template doc/README.hbs build/index.js build/storage.js > README.md"
   },
-  "author": "Juan Cruz Viotti <juan@balena.io>",
+  "author": "Balena Ltd. <hello@balena.io>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@balena/lint": "^9.3.13",
